@@ -347,4 +347,4 @@ Built with:
 - [SQLModel](https://sqlmodel.tiangolo.com/) - SQL databases in Python
 - [Typer](https://typer.tiangolo.com/) - CLI framework
 - [pytest](https://pytest.org/) - Testing framework
-- [Ruff](https://beta.ruff.rs/) - Python linter
+- [Ruff](https://beta.ruff.rs/) - Python linter# managed_team
