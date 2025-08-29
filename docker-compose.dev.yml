@@ -1,0 +1,79 @@
+# Development Docker Compose - Simplified for local development
+version: '3.8'
+
+services:
+  # Main AI Manager Application
+  ai-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: ai-manager-dev
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./manager.db
+      - ENVIRONMENT=development
+      - DEBUG=true
+      - LOG_LEVEL=DEBUG
+      - SECRET_KEY=local-development-secret-key
+      - JWT_SECRET_KEY=local-jwt-secret
+      - OPENAI_API_KEY=mock-openai-key
+      - ANTHROPIC_API_KEY=mock-anthropic-key
+      - LLM_PROVIDER=mock
+      - WORKER_CONCURRENCY=2
+      - MAX_CONCURRENT_TASKS=3
+    volumes:
+      - ./src:/app/src
+      - ./cli:/app/cli
+      - ./logs:/app/logs
+      - ./artifacts:/app/artifacts
+      - ./runs:/app/runs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # PostgreSQL Database (optional for development)
+  postgres:
+    image: postgres:15-alpine
+    container_name: ai-manager-postgres-dev
+    restart: unless-stopped
+    environment:
+      - POSTGRES_DB=ai_manager_dev
+      - POSTGRES_USER=ai_manager
+      - POSTGRES_PASSWORD=dev_password_123
+    volumes:
+      - postgres_dev_data:/var/lib/postgresql/data
+    ports:
+      - "5433:5432"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ai_manager -d ai_manager_dev"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Redis Cache (optional for development)
+  redis:
+    image: redis:7-alpine
+    container_name: ai-manager-redis-dev
+    restart: unless-stopped
+    command: redis-server --appendonly yes
+    volumes:
+      - redis_dev_data:/data
+    ports:
+      - "6380:6379"  # Different port to avoid conflicts
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+
+volumes:
+  postgres_dev_data:
+    driver: local
+  redis_dev_data:
+    driver: local

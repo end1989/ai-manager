@@ -1,0 +1,82 @@
+version: '3.8'
+
+services:
+  ai-manager:
+    build:
+      context: ..
+      dockerfile: ops/Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - MANAGER_DB_URL=sqlite:///./data/manager.db
+      - API_HOST=0.0.0.0
+      - API_PORT=8000
+      - LOG_LEVEL=INFO
+      - DEV_MODE=1
+    volumes:
+      - manager_data:/app/data
+      - manager_runs:/app/runs
+      - manager_artifacts:/app/artifacts
+      - manager_logs:/app/logs
+      # Mount source code for development
+      - ../src:/app/src:ro
+    depends_on:
+      - db
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  db:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=aimanager
+      - POSTGRES_USER=manager
+      - POSTGRES_PASSWORD=manager_password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U manager -d aimanager"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  worker:
+    build:
+      context: ..
+      dockerfile: ops/Dockerfile
+    environment:
+      - MANAGER_DB_URL=postgresql://manager:manager_password@db:5432/aimanager
+      - WORKER_SANDBOX=1
+      - NO_NET=1
+    volumes:
+      - manager_runs:/app/runs
+      - manager_artifacts:/app/artifacts
+      - ../src:/app/src:ro
+    depends_on:
+      - db
+    command: ["python", "-c", "print('Worker container ready for task execution')"]
+
+  # Optional: Redis for distributed task queue (future enhancement)
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+
+volumes:
+  manager_data:
+  manager_runs:
+  manager_artifacts:
+  manager_logs:
+  postgres_data:
+  # redis_data:
+
+networks:
+  default:
+    name: ai-manager-network

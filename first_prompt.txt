@@ -1,0 +1,352 @@
+
+---
+
+# 📦 One-Shot Prompt — Build the AI Manager Infrastructure (Python)
+
+**ROLE (system/developer):**
+You are a **principal engineer** tasked with shipping a **local-first AI Manager infrastructure** in Python. The product is a working codebase the user can clone, run, and extend. Your focus is the **Manager** (control plane): task planning, delegation, worker lifecycle, evidence-based review, and safe execution. You must generate a complete repository with code, tests, docs, CI, and runnable demos.
+
+---
+
+## 0) Goals (what to build)
+
+* A **Manager service** (FastAPI + orchestration core) that:
+
+  * Accepts a **Task** (spec) via REST/CLI.
+  * **Plans** tasks (can be manual today, pluggable for LLM planning later).
+  * **Delegates** work to **Workers** via a local runner (subprocess) with an isolated venv.
+  * **Reviews** worker outputs skeptically using rules + tests + static checks.
+  * Stores everything (tasks, runs, artifacts, logs) in **SQLite**.
+* A **Worker runtime** that a Manager can spawn:
+
+  * Executes a “Worker Prompt” plan locally (no external APIs required).
+  * Produces **Task Reports** + **PR Proposals** (JSON) + test evidence.
+* A **Task Queue** (SQLite + simple FIFO) and orchestration loop.
+* **Skeptical review engine**: run tests, lint, mypy, and basic policy checks before “merge”.
+* **Local-only** by default (no secrets needed). Provide extension points for real LLMs later.
+* Ship with:
+
+  * **CLI** (`manager`, `worker`) and **FastAPI** admin UI (/docs).
+  * **Unit + integration tests** (pytest) and example scenario.
+  * **Dockerfile**, **docker-compose**, **GitHub Actions CI**.
+  * **Docs**: README, ARCHITECTURE.md, DECISIONS.md, CONTRIBUTING.md.
+
+---
+
+## 1) Stack & Standards
+
+* **Python 3.11+**.
+* Packaging: `pyproject.toml` (uv/poetry-compatible).
+* Web: **FastAPI** + **Uvicorn**.
+* DB: **SQLite** via **SQLModel** (or SQLAlchemy + Pydantic).
+* Tests: **pytest**, **pytest-cov**; coverage ≥ **85% on changed lines**.
+* Lint/Format/Types: **ruff**, **black**, **mypy**.
+* Logging: structured (JSON in prod), with request IDs and run IDs.
+* Config: `pydantic-settings`; 12-factor style.
+* Container: minimal **Dockerfile**, **docker-compose.yml** for dev.
+* CI: GitHub Actions running lint, type checks, tests.
+
+---
+
+## 2) Architecture (deliver these modules)
+
+* `core/manager.py` — orchestrator: plan → enqueue → dispatch → review → merge.
+* `core/planner.py` — slices big tasks to subtasks (rule-based; LLM plugin hook).
+* `core/queue.py` — SQLite-backed queue, status transitions, idempotency keys.
+* `core/review.py` — skeptical reviewer: executes test suite, static checks, policy rules; emits **Review Report**.
+* `core/artifacts.py` — run directories, logs, JSON artifacts, retention policy.
+* `core/executor.py` — worker subprocess launcher; ephemeral **venv** per run; timeouts; resource caps.
+* `core/schemas.py` — **Task Spec**, **Task Report**, **PR Proposal**, **Review Report** (Pydantic).
+* `adapters/worker_prompt.py` — baseline Worker behavior (no real LLM required).
+* `adapters/llm_stub.py` — stub that returns deterministic text (future: swap with real LLM).
+* `api/http.py` — FastAPI routes (submit task, list tasks, runs, artifacts; trigger review).
+* `cli/manager_cli.py` — `manager` commands (submit, plan, run, review, logs).
+* `cli/worker_cli.py` — `worker` command to execute an assigned task spec locally.
+* `store/models.py` — SQLModel entities (Task, Run, Artifact, Review, Event).
+* `ops/` — Dockerfile, compose, CI, Makefile, logging config, seed demo.
+
+**Security & Safety:**
+
+* Workers run with **no network** by default (configurable), **low privileges**, **timeouts**, and **cwd sandbox** (`runs/<run-id>`).
+* Max artifact sizes; redact env; prevent secret leakage in logs.
+
+---
+
+## 3) Data Contracts (use verbatim)
+
+### Task Spec
+
+```json
+{
+  "task_id": "T-0001",
+  "title": "Short imperative title",
+  "goal": "Plain-English goal for the Manager to fulfill",
+  "background": "Why this matters / constraints / non-goals",
+  "inputs": ["facts, files, prior PRs, APIs"],
+  "deliverables": [
+    "code files or diffs",
+    "tests added/updated",
+    "docs updated"
+  ],
+  "acceptance_criteria": [
+    "measurable behaviors and test expectations"
+  ],
+  "definition_of_done": [
+    "ruff+black clean",
+    "mypy passes",
+    "pytest passes",
+    "coverage >= 85% on changed lines",
+    "docs updated if behavior changed"
+  ],
+  "risk_checks": [
+    "performance risks?",
+    "security validation?",
+    "edge cases & failure paths?"
+  ],
+  "run_instructions": [
+    "commands to run app/tests locally"
+  ],
+  "timebox_hours": 2
+}
+```
+
+### Worker Task Report
+
+```json
+{
+  "task_id": "T-0001",
+  "summary": "What was done and why",
+  "changes": [
+    {"file": "path", "change_type": "added|modified|removed", "reason": "brief"}
+  ],
+  "commands_run": ["..."],
+  "test_results": {
+    "passed": true,
+    "summary": "pytest output summary",
+    "coverage": {"lines": 90, "branches": 80}
+  },
+  "artifacts": [
+    {"type": "log|screenshot|archive|diagram", "location": "artifact path or inline"}
+  ],
+  "open_issues": [
+    {"desc": "known gap", "mitigation": "next step"}
+  ],
+  "proposed_pr": "PR-0001"
+}
+```
+
+### Pull Request Proposal
+
+```json
+{
+  "pr_id": "PR-0001",
+  "title": "Concise change title",
+  "description": "What/why, alternatives considered, tradeoffs",
+  "diff_summary": [
+    {"file": "path", "insertions": 10, "deletions": 2}
+  ],
+  "ci_status": "pending|passed|failed",
+  "tests_added": ["tests/..."],
+  "risk_assessment": {
+    "breaking_change": false,
+    "security_notes": "validation, auth, secrets",
+    "perf_notes": "complexity, caching"
+  },
+  "rollback_plan": "how to revert safely",
+  "migration_notes": "if schema or config changed",
+  "docs_updated": ["README.md", "ARCHITECTURE.md"]
+}
+```
+
+### Review Report
+
+```json
+{
+  "pr_id": "PR-0001",
+  "status": "approved|changes_requested|rejected",
+  "blocking": [
+    "List failing checks with file:line references"
+  ],
+  "non_blocking": [
+    "Refactors or docs nits"
+  ],
+  "evidence": {
+    "pytest": "summary",
+    "coverage": {"lines": 92},
+    "linters": "ruff/mypy summaries",
+    "logs": "key run logs"
+  },
+  "notes": "Rationale for decision"
+}
+```
+
+---
+
+## 4) Required Repository Layout (generate all files)
+
+```
+ai-manager/
+  pyproject.toml
+  README.md
+  ARCHITECTURE.md
+  DECISIONS.md
+  CONTRIBUTING.md
+  .env.example
+  .gitignore
+  src/
+    manager/
+      __init__.py
+      api/http.py
+      core/manager.py
+      core/planner.py
+      core/queue.py
+      core/review.py
+      core/executor.py
+      core/artifacts.py
+      core/schemas.py
+      adapters/worker_prompt.py
+      adapters/llm_stub.py
+      store/models.py
+      config.py
+      logging.yaml
+    cli/
+      manager_cli.py
+      worker_cli.py
+  tests/
+    unit/
+      test_queue.py
+      test_schemas.py
+      test_review_rules.py
+    integration/
+      test_manager_worker_flow.py
+  ops/
+    Dockerfile
+    docker-compose.yml
+    ci.yml
+    Makefile
+```
+
+---
+
+## 5) Features & Behaviors to Implement
+
+### Manager Control Plane
+
+* **Submit Task** (CLI + POST `/tasks`): persist task, enqueue job.
+* **Dispatcher Loop**: pull next pending task → create run → spawn worker subprocess:
+
+  * Create isolated `runs/<run-id>`; write **Task Spec** JSON.
+  * Create ephemeral venv; install project (editable) + test deps.
+  * Launch `worker` entrypoint with `--task file.json` and resource limits.
+  * Capture stdout/stderr → `artifacts/`.
+* **Collect Results**: parse **Worker Task Report** + **PR Proposal**; persist.
+* **Skeptical Review**:
+
+  * Run `ruff`, `black --check`, `mypy`, `pytest --cov`.
+  * Check coverage delta for changed files.
+  * Validate schemas; verify no network used (if `NO_NET=1`).
+  * Emit **Review Report**.
+* **Merge Simulation**:
+
+  * If approved, write “merged” diff into working tree under `services/…`.
+  * Update CHANGELOG; log event.
+
+### Worker Runtime
+
+* Read **Task Spec**; implement minimum code in a sandbox subfolder (e.g., `workdir/`).
+* Generate tests first for bugfix tasks or minimal feature tests for new components.
+* Produce **Worker Task Report** + **PR Proposal**; write to `artifacts/`.
+* Never claim success without evidence (pytest summary, coverage, linter output).
+
+### Task Queue & Persistence
+
+* Tables: `tasks`, `runs`, `artifacts`, `prs`, `reviews`, `events`.
+* Status graph: `queued → running → awaiting_review → approved|changes_requested|rejected → merged`.
+
+### Config & Safety
+
+* Config via env with defaults; example: `MANAGER_DB_URL`, `RUN_CPU_SECS`, `RUN_MEM_MB`, `NO_NET`.
+* Timeouts on worker; kill/cleanup on overrun; exit codes mapped to run status.
+* Log every state transition with `run_id`, `task_id`, `pr_id`.
+
+---
+
+## 6) Developer Experience
+
+* `README.md` must include:
+
+  * Quickstart (uv/poetry/pip), `make dev`, `make test`, `make run`.
+  * `uvicorn manager.api.http:app --reload`.
+  * `manager task submit -f examples/hello_task.json`.
+* `ARCHITECTURE.md`:
+
+  * Sequence diagrams: submit → dispatch → worker → review → merge.
+  * Data model diagrams (mermaid ok).
+* `CONTRIBUTING.md`:
+
+  * Branched workflow, commit style, PR checks, how to add a new review rule.
+
+---
+
+## 7) Example Scenario (ship this ready to run)
+
+* Include `examples/hello_task.json`: “Create a minimal `services/healthsvc` with FastAPI `/health` endpoint, tests, coverage target.”
+* `integration/test_manager_worker_flow.py` runs:
+
+  1. Submit example task via Manager API.
+  2. Run dispatcher once.
+  3. Assert PR Proposal exists.
+  4. Trigger review; expect **approved**.
+  5. Assert merged files exist and tests pass at repo root.
+
+---
+
+## 8) CI & Containers
+
+* **GitHub Actions** `ops/ci.yml`: set up Python, install deps, run ruff/mypy/pytest with coverage artifact.
+* **Dockerfile**: multistage; final minimal image running `uvicorn`.
+* **docker-compose.yml**: dev stack with live reload and a persistent volume for `runs/`.
+
+---
+
+## 9) Output Format (strict)
+
+Produce a **single Markdown response** that contains the whole repository as **file-scoped code blocks** using this exact pattern repeatedly:
+
+````markdown
+# FILE: <path/from/repo/root>
+```python
+# (or yaml, toml, md, etc.)
+<file contents>
+```
+````
+
+* Include **every file** listed in the repository layout.
+* Keep line lengths ≤ 100 where reasonable.
+* No placeholders like “TODO” for required logic—implement working, minimal code.
+* Ensure tests **pass locally** given the files you output.
+* At the end, include a **“Smoke Test”** section with the exact commands to:
+
+  1. create venv, 2) install, 3) run unit/integration tests, 4) start API, 5) submit the example task.
+
+---
+
+## 10) Quality Gates (you must run mentally before emitting)
+
+* Does `pytest -q` pass with coverage summary ≥ 85% on changed lines for the example?
+* Do `ruff`, `black --check`, and `mypy` pass on the generated repo?
+* Can the dispatcher run once and produce a PR Proposal + Review Report?
+* Are logs and artifacts written under `runs/<run-id>/` with stable naming?
+* Is the code extensible to real LLM usage by swapping `adapters/llm_stub.py`?
+
+---
+
+## 11) Non-Goals (for now)
+
+* No real external LLM calls (stubs only).
+* No Kubernetes; Docker Compose is enough.
+* No persistent user auth; local admin only.
+
+---
+
+**Deliver the full repository now, following the Output Format.**

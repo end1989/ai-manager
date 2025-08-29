@@ -1,0 +1,297 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ai-manager-app
+  namespace: ai-manager
+  labels:
+    app: ai-manager
+    component: application
+    version: v1.0.0
+spec:
+  replicas: 3
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  selector:
+    matchLabels:
+      app: ai-manager
+      component: application
+  template:
+    metadata:
+      labels:
+        app: ai-manager
+        component: application
+        version: v1.0.0
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "8000"
+        prometheus.io/path: "/metrics"
+    spec:
+      serviceAccountName: ai-manager-service-account
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 1001
+        fsGroup: 1001
+      containers:
+      - name: ai-manager
+        image: ghcr.io/end1989/ai-manager:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
+          name: http
+          protocol: TCP
+        env:
+        # Database configuration
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: database-url
+        
+        # Redis configuration
+        - name: REDIS_URL
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: redis-url
+        
+        # Application secrets
+        - name: SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: secret-key
+        - name: JWT_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: jwt-secret-key
+        
+        # AI Provider API Keys
+        - name: OPENAI_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: openai-api-key
+        - name: ANTHROPIC_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: anthropic-api-key
+        
+        envFrom:
+        - configMapRef:
+            name: ai-manager-config
+        
+        volumeMounts:
+        - name: ai-manager-logs
+          mountPath: /app/logs
+        - name: ai-manager-artifacts
+          mountPath: /app/artifacts
+        - name: ai-manager-runs
+          mountPath: /app/runs
+        
+        resources:
+          requests:
+            cpu: 1000m
+            memory: 2Gi
+          limits:
+            cpu: 2000m
+            memory: 4Gi
+        
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 60
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        
+        startupProbe:
+          httpGet:
+            path: /health
+            port: 8000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 30
+        
+        securityContext:
+          allowPrivilegeEscalation: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          runAsUser: 1001
+          capabilities:
+            drop:
+            - ALL
+      
+      initContainers:
+      - name: wait-for-db
+        image: postgres:15-alpine
+        command:
+        - sh
+        - -c
+        - |
+          until pg_isready -h ai-manager-postgres -p 5432 -U ai_manager; do
+            echo "Waiting for database..."
+            sleep 2
+          done
+          echo "Database is ready!"
+      
+      - name: db-migrate
+        image: ghcr.io/end1989/ai-manager:latest
+        command:
+        - python
+        - -m
+        - cli.db_cli
+        - migrate
+        env:
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: ai-manager-secrets
+              key: database-url
+      
+      volumes:
+      - name: ai-manager-logs
+        persistentVolumeClaim:
+          claimName: ai-manager-logs-pvc
+      - name: ai-manager-artifacts
+        persistentVolumeClaim:
+          claimName: ai-manager-artifacts-pvc
+      - name: ai-manager-runs
+        persistentVolumeClaim:
+          claimName: ai-manager-runs-pvc
+      
+      imagePullSecrets:
+      - name: ghcr-secret
+      
+      nodeSelector:
+        kubernetes.io/arch: amd64
+      
+      tolerations:
+      - key: "ai-manager"
+        operator: "Equal"
+        value: "true"
+        effect: "NoSchedule"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ai-manager-service
+  namespace: ai-manager
+  labels:
+    app: ai-manager
+    component: application
+  annotations:
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 80
+    targetPort: 8000
+    name: http
+    protocol: TCP
+  - port: 443
+    targetPort: 8000
+    name: https
+    protocol: TCP
+  selector:
+    app: ai-manager
+    component: application
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ai-manager-service-account
+  namespace: ai-manager
+  labels:
+    app: ai-manager
+automountServiceAccountToken: true
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: ai-manager-role
+  namespace: ai-manager
+rules:
+- apiGroups: [""]
+  resources: ["pods", "services", "endpoints"]
+  verbs: ["get", "list", "watch"]
+- apiGroups: ["apps"]
+  resources: ["deployments", "replicasets"]
+  verbs: ["get", "list", "watch"]
+
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: ai-manager-rolebinding
+  namespace: ai-manager
+subjects:
+- kind: ServiceAccount
+  name: ai-manager-service-account
+  namespace: ai-manager
+roleRef:
+  kind: Role
+  name: ai-manager-role
+  apiGroup: rbac.authorization.k8s.io
+
+---
+# Persistent Volume Claims
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-manager-logs-pvc
+  namespace: ai-manager
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "efs"
+  resources:
+    requests:
+      storage: 50Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-manager-artifacts-pvc
+  namespace: ai-manager
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "efs"
+  resources:
+    requests:
+      storage: 200Gi
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ai-manager-runs-pvc
+  namespace: ai-manager
+spec:
+  accessModes:
+    - ReadWriteMany
+  storageClassName: "efs"
+  resources:
+    requests:
+      storage: 500Gi

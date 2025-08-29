@@ -1,0 +1,377 @@
+name: Security Scanning and Compliance
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main ]
+  schedule:
+    # Run security scans daily at 2 AM
+    - cron: '0 2 * * *'
+  workflow_dispatch:
+
+env:
+  PYTHON_VERSION: '3.11'
+
+jobs:
+  # Secret Scanning and Validation
+  secret-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Run GitLeaks secret scanner
+      uses: gitleaks/gitleaks-action@v2
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITLEAKS_LICENSE: ${{ secrets.GITLEAKS_LICENSE}}
+    
+    - name: Run TruffleHog secret scanner
+      uses: trufflesecurity/trufflehog@v3.63.2-beta
+      with:
+        path: ./
+        base: main
+        head: HEAD
+        extra_args: --debug --only-verified
+
+  # Dependency Vulnerability Scanning
+  dependency-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install safety pip-audit
+    
+    - name: Run Safety vulnerability check
+      run: |
+        pip install -r requirements.txt
+        safety check --json --output safety-report.json || true
+    
+    - name: Run pip-audit vulnerability check
+      run: |
+        pip-audit --format=json --output=pip-audit-report.json || true
+    
+    - name: Upload dependency scan results
+      uses: actions/upload-artifact@v3
+      with:
+        name: dependency-scan-results
+        path: |
+          safety-report.json
+          pip-audit-report.json
+
+  # Container Image Scanning
+  container-scan:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+      packages: write
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
+    
+    - name: Build image for scanning
+      uses: docker/build-push-action@v5
+      with:
+        context: .
+        load: true
+        tags: ai-manager:scan
+        cache-from: type=gha
+        cache-to: type=gha,mode=max
+    
+    - name: Run Trivy vulnerability scanner
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: ai-manager:scan
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL,HIGH,MEDIUM'
+    
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: 'trivy-results.sarif'
+    
+    - name: Run Snyk Container scan
+      continue-on-error: true
+      uses: snyk/actions/docker@master
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      with:
+        image: ai-manager:scan
+        args: --severity-threshold=high
+
+  # SAST (Static Application Security Testing)
+  sast-analysis:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install SAST tools
+      run: |
+        pip install bandit[toml] semgrep
+    
+    - name: Run Bandit security linter
+      run: |
+        bandit -r src/ -f json -o bandit-report.json -ll
+        bandit -r src/ -f sarif -o bandit-results.sarif -ll || true
+    
+    - name: Run Semgrep SAST scan
+      run: |
+        semgrep --config=auto --json --output=semgrep-report.json src/ || true
+        semgrep --config=auto --sarif --output=semgrep-results.sarif src/ || true
+    
+    - name: Upload SAST results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: bandit-results.sarif
+    
+    - name: Upload Semgrep results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: semgrep-results.sarif
+    
+    - name: Upload SAST artifacts
+      uses: actions/upload-artifact@v3
+      with:
+        name: sast-results
+        path: |
+          bandit-report.json
+          semgrep-report.json
+
+  # License Compliance Check
+  license-check:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: ${{ env.PYTHON_VERSION }}
+    
+    - name: Install pip-licenses
+      run: pip install pip-licenses
+    
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+    
+    - name: Check licenses
+      run: |
+        pip-licenses --format=json --output-file=licenses.json
+        pip-licenses --format=csv --output-file=licenses.csv
+        
+        # Check for problematic licenses
+        pip-licenses --fail-on="GPL" --fail-on="LGPL" --fail-on="AGPL" || echo "Warning: Found copyleft licenses"
+    
+    - name: Upload license reports
+      uses: actions/upload-artifact@v3
+      with:
+        name: license-reports
+        path: |
+          licenses.json
+          licenses.csv
+
+  # Infrastructure as Code Security
+  iac-security:
+    runs-on: ubuntu-latest
+    permissions:
+      security-events: write
+      contents: read
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Run Checkov IaC scanner
+      uses: bridgecrewio/checkov-action@master
+      with:
+        directory: .
+        framework: kubernetes,dockerfile,github_actions
+        output_format: sarif
+        output_file_path: checkov-results.sarif
+        quiet: true
+        soft_fail: true
+    
+    - name: Upload Checkov results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v2
+      if: always()
+      with:
+        sarif_file: checkov-results.sarif
+
+  # Security Policy Validation
+  policy-validation:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Validate security policies
+      run: |
+        # Check for required security files
+        files=(
+          "SECURITY.md"
+          ".github/SECURITY.md" 
+          "PRIVACY.md"
+          "CODE_OF_CONDUCT.md"
+        )
+        
+        missing_files=()
+        for file in "${files[@]}"; do
+          if [ ! -f "$file" ]; then
+            missing_files+=("$file")
+          fi
+        done
+        
+        if [ ${#missing_files[@]} -ne 0 ]; then
+          echo "Missing security policy files:"
+          printf '%s\n' "${missing_files[@]}"
+          echo "::warning::Consider adding missing security policy files"
+        else
+          echo "All security policy files are present"
+        fi
+    
+    - name: Check for secrets in environment files
+      run: |
+        # Check for potential secrets in .env files
+        if find . -name "*.env*" -not -path "./.git/*" | xargs grep -l "password\|secret\|key\|token" | grep -v ".env.example"; then
+          echo "::error::Found potential secrets in environment files"
+          exit 1
+        else
+          echo "No secrets found in environment files"
+        fi
+
+  # Compliance Report Generation
+  compliance-report:
+    runs-on: ubuntu-latest
+    needs: [secret-scan, dependency-scan, container-scan, sast-analysis, license-check, iac-security, policy-validation]
+    if: always()
+    steps:
+    - uses: actions/checkout@v4
+    
+    - name: Download all scan results
+      uses: actions/download-artifact@v3
+    
+    - name: Generate compliance report
+      run: |
+        cat > compliance-report.md << 'EOF'
+        # Security Compliance Report
+        
+        **Repository**: ${{ github.repository }}
+        **Branch**: ${{ github.ref_name }}
+        **Commit**: ${{ github.sha }}
+        **Date**: $(date -u +"%Y-%m-%d %H:%M:%S UTC")
+        
+        ## Security Scan Results
+        
+        ### Secret Scanning
+        - Status: ${{ needs.secret-scan.result }}
+        - Tool: GitLeaks, TruffleHog
+        
+        ### Dependency Scanning  
+        - Status: ${{ needs.dependency-scan.result }}
+        - Tools: Safety, pip-audit
+        
+        ### Container Scanning
+        - Status: ${{ needs.container-scan.result }}
+        - Tools: Trivy, Snyk
+        
+        ### SAST Analysis
+        - Status: ${{ needs.sast-analysis.result }}
+        - Tools: Bandit, Semgrep
+        
+        ### License Compliance
+        - Status: ${{ needs.license-check.result }}
+        - Tool: pip-licenses
+        
+        ### Infrastructure Security
+        - Status: ${{ needs.iac-security.result }}
+        - Tool: Checkov
+        
+        ### Policy Validation
+        - Status: ${{ needs.policy-validation.result }}
+        - Manual security policy checks
+        
+        ## Overall Compliance Status
+        
+        EOF
+        
+        # Determine overall status
+        if [[ "${{ needs.secret-scan.result }}" == "success" && 
+              "${{ needs.dependency-scan.result }}" == "success" && 
+              "${{ needs.container-scan.result }}" == "success" && 
+              "${{ needs.sast-analysis.result }}" == "success" && 
+              "${{ needs.license-check.result }}" == "success" && 
+              "${{ needs.iac-security.result }}" == "success" && 
+              "${{ needs.policy-validation.result }}" == "success" ]]; then
+          echo "✅ **COMPLIANT** - All security checks passed" >> compliance-report.md
+        else
+          echo "❌ **NON-COMPLIANT** - Some security checks failed" >> compliance-report.md
+        fi
+    
+    - name: Upload compliance report
+      uses: actions/upload-artifact@v3
+      with:
+        name: compliance-report
+        path: compliance-report.md
+    
+    - name: Comment compliance report on PR
+      if: github.event_name == 'pull_request'
+      uses: actions/github-script@v6
+      with:
+        script: |
+          const fs = require('fs');
+          const report = fs.readFileSync('compliance-report.md', 'utf8');
+          
+          github.rest.issues.createComment({
+            issue_number: context.issue.number,
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            body: report
+          });
+
+  # Security notification
+  security-notification:
+    runs-on: ubuntu-latest
+    needs: [compliance-report]
+    if: failure() && github.ref == 'refs/heads/main'
+    steps:
+    - name: Send security alert
+      uses: 8398a7/action-slack@v3
+      with:
+        status: failure
+        channel: '#security-alerts'
+        webhook_url: ${{ secrets.SLACK_SECURITY_WEBHOOK }}
+        text: |
+          🚨 Security compliance failure detected!
+          Repository: ${{ github.repository }}
+          Commit: ${{ github.sha }}
+          Please review the security scan results immediately.

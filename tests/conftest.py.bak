@@ -1,0 +1,397 @@
+"""Pytest configuration and shared fixtures for comprehensive testing."""
+
+import asyncio
+import os
+import tempfile
+import shutil
+from pathlib import Path
+from typing import Generator, AsyncGenerator
+import pytest
+import sqlite3
+from unittest.mock import patch
+
+from fastapi.testclient import TestClient
+
+# Import our modules to test
+from manager.config import Settings
+from manager.core.manager import ManagerCore
+from manager.core.queue import TaskQueue
+from manager.store.models import create_db_and_tables, engine
+from manager.api.http import app
+
+
+@pytest.fixture(scope="session")
+def event_loop():
+    """Create an instance of the default event loop for the test session."""
+    loop = asyncio.new_event_loop()
+    yield loop
+    loop.close()
+
+
+@pytest.fixture
+def temp_dir():
+    """Create a temporary directory for test isolation."""
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        yield Path(tmp_dir)
+
+
+@pytest.fixture
+def test_env(temp_dir):
+    """Set up isolated test environment with temporary paths."""
+    # Store original environment
+    original_env = os.environ.copy()
+    
+    # Set test environment variables
+    test_db_path = temp_dir / "test_manager.db"
+    test_env_vars = {
+        "MANAGER_DB_URL": f"sqlite:///{test_db_path}",
+        "RUNS_DIR": str(temp_dir / "runs"),
+        "ARTIFACTS_DIR": str(temp_dir / "artifacts"),
+        "LOGS_DIR": str(temp_dir / "logs"),
+        "DEV_MODE": "1",
+        "LOG_LEVEL": "DEBUG",
+        "RUN_TIMEOUT_SECS": "30",  # Shorter timeout for tests
+    }
+    
+    for key, value in test_env_vars.items():
+        os.environ[key] = value
+    
+    # Create test directories
+    (temp_dir / "runs").mkdir()
+    (temp_dir / "artifacts").mkdir()
+    (temp_dir / "logs").mkdir()
+    
+    yield temp_dir, test_env_vars
+    
+    # Restore original environment
+    os.environ.clear()
+    os.environ.update(original_env)
+
+
+@pytest.fixture
+def test_settings(test_env):
+    """Create test settings with isolated environment."""
+    temp_dir, env_vars = test_env
+    return Settings()
+
+
+@pytest.fixture
+def test_db(test_env):
+    """Create isolated test database."""
+    temp_dir, env_vars = test_env
+    db_path = temp_dir / "test_manager.db"
+    
+    # Create database and tables
+    create_db_and_tables()
+    
+    yield db_path
+    
+    # Cleanup
+    try:
+        if db_path.exists():
+            db_path.unlink()
+    except Exception:
+        pass
+
+
+@pytest.fixture
+def task_queue(test_db):
+    """Create TaskQueue instance with test database."""
+    return TaskQueue()
+
+
+@pytest.fixture
+async def manager_core(test_db):
+    """Create ManagerCore instance for testing."""
+    manager = ManagerCore()
+    yield manager
+    
+    # Cleanup: stop dispatcher if running
+    try:
+        await manager.stop_dispatcher()
+    except Exception:
+        pass
+
+
+@pytest.fixture
+def api_client(test_db):
+    """Create FastAPI test client."""
+    return TestClient(app)
+
+
+@pytest.fixture
+def sample_task_dict():
+    """Sample task specification as dictionary."""
+    return {
+        "task_id": "T-test-001",
+        "title": "Test task implementation",
+        "goal": "Create a simple test implementation for validation",
+        "background": "Testing the system functionality",
+        "inputs": ["Python", "FastAPI"],
+        "deliverables": [
+            "Simple Python module",
+            "Basic tests",
+            "README file"
+        ],
+        "acceptance_criteria": [
+            "Module implements required functionality",
+            "Tests pass with coverage >85%",
+            "Documentation is complete"
+        ],
+        "definition_of_done": [
+            "ruff+black clean",
+            "mypy passes", 
+            "pytest passes",
+            "coverage >= 85% on changed lines"
+        ],
+        "timebox_hours": 1.0
+    }
+
+
+@pytest.fixture
+def sample_task_spec(sample_task_dict):
+    """Sample TaskSpec object."""
+    from manager.core.schemas import TaskSpec
+    return TaskSpec(**sample_task_dict)
+
+
+@pytest.fixture
+def sample_task_file(temp_dir, sample_task_dict):
+    """Create temporary task specification file."""
+    import json
+    
+    task_file = temp_dir / "test_task.json"
+    with open(task_file, "w") as f:
+        json.dump(sample_task_dict, f, indent=2)
+    
+    return task_file
+
+
+@pytest.fixture
+def mock_subprocess():
+    """Mock subprocess operations for testing."""
+    from unittest.mock import AsyncMock, MagicMock
+    
+    mock_process = AsyncMock()
+    mock_process.returncode = 0
+    mock_process.pid = 12345
+    mock_process.wait.return_value = 0
+    mock_process.communicate.return_value = (b"Test output", b"")
+    
+    with patch("asyncio.create_subprocess_exec", return_value=mock_process) as mock_exec:
+        yield mock_exec, mock_process
+
+
+@pytest.fixture
+def real_workdir(temp_dir):
+    """Create a real working directory with sample files for testing."""
+    workdir = temp_dir / "workdir"
+    workdir.mkdir()
+    
+    # Create sample Python file
+    sample_py = workdir / "sample.py"
+    sample_py.write_text('''
+"""Sample module for testing."""
+
+def hello(name: str = "World") -> str:
+    """Return a greeting message."""
+    return f"Hello, {name}!"
+
+def add(a: int, b: int) -> int:
+    """Add two numbers."""
+    return a + b
+
+if __name__ == "__main__":
+    print(hello())
+''')
+    
+    # Create sample test file
+    test_dir = workdir / "tests"
+    test_dir.mkdir()
+    
+    test_file = test_dir / "test_sample.py"
+    test_file.write_text('''
+"""Tests for sample module."""
+
+import sys
+sys.path.insert(0, "..")
+
+from sample import hello, add
+
+def test_hello_default():
+    """Test hello function with default parameter."""
+    assert hello() == "Hello, World!"
+
+def test_hello_custom():
+    """Test hello function with custom name."""
+    assert hello("Alice") == "Hello, Alice!"
+
+def test_add():
+    """Test add function."""
+    assert add(2, 3) == 5
+    assert add(-1, 1) == 0
+''')
+    
+    # Create __init__.py files
+    (workdir / "__init__.py").write_text("")
+    (test_dir / "__init__.py").write_text("")
+    
+    return workdir
+
+
+@pytest.fixture
+def db_connection(test_db):
+    """Direct SQLite connection for low-level testing."""
+    conn = sqlite3.connect(str(test_db))
+    yield conn
+    conn.close()
+
+
+class TestUtilities:
+    """Utility class for common testing operations."""
+    
+    @staticmethod
+    def verify_task_in_db(task_queue: TaskQueue, task_id: str) -> bool:
+        """Verify a task exists in the database."""
+        task = task_queue.get_task(task_id)
+        return task is not None
+    
+    @staticmethod
+    def create_test_run_directory(temp_dir: Path, run_id: str) -> Path:
+        """Create a test run directory with basic structure."""
+        run_dir = temp_dir / "runs" / run_id
+        run_dir.mkdir(parents=True)
+        
+        # Create subdirectories
+        (run_dir / "workdir").mkdir()
+        (run_dir / "logs").mkdir()
+        (run_dir / "artifacts").mkdir()
+        
+        return run_dir
+    
+    @staticmethod
+    def assert_file_exists(file_path: Path, message: str = ""):
+        """Assert that a file exists with optional message."""
+        assert file_path.exists(), f"File should exist: {file_path} {message}"
+    
+    @staticmethod
+    def assert_json_file_valid(file_path: Path):
+        """Assert that a JSON file exists and is valid."""
+        import json
+        
+        TestUtilities.assert_file_exists(file_path)
+        
+        try:
+            with open(file_path) as f:
+                json.load(f)
+        except json.JSONDecodeError as e:
+            pytest.fail(f"Invalid JSON in {file_path}: {e}")
+    
+    @staticmethod
+    async def wait_for_condition(condition_func, timeout: float = 5.0, interval: float = 0.1):
+        """Wait for a condition to become true."""
+        import time
+        
+        start_time = time.time()
+        while time.time() - start_time < timeout:
+            if condition_func():
+                return True
+            await asyncio.sleep(interval)
+        
+        return False
+
+
+@pytest.fixture
+def test_utils():
+    """Provide test utilities."""
+    return TestUtilities
+
+
+@pytest.fixture
+def capfd_disabled(capfd):
+    """Temporarily disable capture for debugging."""
+    with capfd.disabled():
+        yield
+
+
+# Marks for test categorization
+pytest.mark.unit = pytest.mark.unit
+pytest.mark.integration = pytest.mark.integration
+pytest.mark.slow = pytest.mark.slow
+pytest.mark.database = pytest.mark.database
+pytest.mark.subprocess = pytest.mark.subprocess
+pytest.mark.filesystem = pytest.mark.filesystem
+
+
+# Custom assertions for better test failures
+def assert_task_status(task_queue: TaskQueue, task_id: str, expected_status: str):
+    """Assert task has expected status with detailed error message."""
+    task_model = task_queue.db.get_task(task_id)
+    assert task_model is not None, f"Task {task_id} not found in database"
+    assert task_model.status == expected_status, (
+        f"Task {task_id} status is '{task_model.status}', expected '{expected_status}'"
+    )
+
+
+def assert_run_artifacts_exist(temp_dir: Path, run_id: str):
+    """Assert that run artifacts exist and are valid."""
+    run_dir = temp_dir / "runs" / run_id
+    
+    # Check directory exists
+    assert run_dir.exists(), f"Run directory should exist: {run_dir}"
+    
+    # Check required files
+    task_spec_file = run_dir / "task_spec.json"
+    worker_report_file = run_dir / "worker_report.json"
+    pr_proposal_file = run_dir / "pr_proposal.json"
+    
+    TestUtilities.assert_json_file_valid(task_spec_file)
+    TestUtilities.assert_json_file_valid(worker_report_file)
+    TestUtilities.assert_json_file_valid(pr_proposal_file)
+
+
+# Add custom assertions to pytest namespace
+pytest.assert_task_status = assert_task_status
+pytest.assert_run_artifacts_exist = assert_run_artifacts_exist
+
+
+# Pytest configuration
+def pytest_configure(config):
+    """Configure pytest with custom markers."""
+    config.addinivalue_line("markers", "unit: Unit tests")
+    config.addinivalue_line("markers", "integration: Integration tests")
+    config.addinivalue_line("markers", "slow: Slow tests")
+    config.addinivalue_line("markers", "database: Database tests")
+    config.addinivalue_line("markers", "subprocess: Subprocess tests") 
+    config.addinivalue_line("markers", "filesystem: Filesystem tests")
+
+
+def pytest_collection_modifyitems(config, items):
+    """Automatically mark tests based on their location."""
+    for item in items:
+        # Mark tests in unit directory as unit tests
+        if "unit" in str(item.fspath):
+            item.add_marker(pytest.mark.unit)
+        
+        # Mark tests in integration directory as integration tests
+        if "integration" in str(item.fspath):
+            item.add_marker(pytest.mark.integration)
+        
+        # Mark async tests
+        if asyncio.iscoroutinefunction(item.function):
+            item.add_marker(pytest.mark.asyncio)
+
+
+# Cleanup after all tests
+def pytest_sessionfinish(session, exitstatus):
+    """Cleanup after test session."""
+    # Clean up any remaining test artifacts
+    import tempfile
+    temp_dir = Path(tempfile.gettempdir())
+    
+    for item in temp_dir.glob("tmp*"):
+        if item.is_dir():
+            try:
+                shutil.rmtree(item, ignore_errors=True)
+            except Exception:
+                pass

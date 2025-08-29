@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: ai-manager
+  labels:
+    name: ai-manager
+    environment: production
+    app: ai-manager-system
+  annotations:
+    description: "AI Manager System - Production Namespace"

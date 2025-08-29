@@ -1,0 +1,58 @@
+{
+  "assertion_failed": "Database schema invalid: missing tables ['tasks', 'runs', 'artifacts', 'prs', 'reviews', 'events']",
+  "context": {
+    "test_purpose": "Database schema validation",
+    "database_file": "C:\\Users\\PureLoop\\AppData\\Local\\Temp\\tmpceh5pp41\\test_manager.db",
+    "expected_tables": [
+      "tasks",
+      "runs",
+      "artifacts",
+      "prs",
+      "reviews",
+      "events"
+    ],
+    "schema_checks": [
+      {
+        "check": "table_existence",
+        "expected_tables": [
+          "tasks",
+          "runs",
+          "artifacts",
+          "prs",
+          "reviews",
+          "events"
+        ],
+        "actual_tables": [],
+        "missing_tables": [
+          "tasks",
+          "runs",
+          "artifacts",
+          "prs",
+          "reviews",
+          "events"
+        ]
+      }
+    ],
+    "error_analysis": {
+      "missing_tables": [
+        "tasks",
+        "runs",
+        "artifacts",
+        "prs",
+        "reviews",
+        "events"
+      ],
+      "likely_cause": "Database not properly initialized",
+      "fix_commands": [
+        "python -c \"from manager.store.models import create_db_and_tables; create_db_and_tables()\"",
+        "sqlite3 C:\\Users\\PureLoop\\AppData\\Local\\Temp\\tmpceh5pp41\\test_manager.db '.tables'"
+      ]
+    }
+  },
+  "timestamp": "2025-08-29T18:35:52.378207",
+  "suggested_investigation": [
+    "Check the condition: Database schema invalid: missing tables ['tasks', 'runs', 'artifacts', 'prs', 'reviews', 'events']",
+    "Review the context data provided",
+    "Examine the test setup and fixtures"
+  ]
+}

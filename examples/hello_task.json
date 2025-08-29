@@ -1,0 +1,42 @@
+{
+  "task_id": "T-hello-001",
+  "title": "Create minimal healthsvc with FastAPI /health endpoint",
+  "goal": "Create a minimal health service with FastAPI that provides a /health endpoint for monitoring and basic service information",
+  "background": "We need a foundational health check service that can be used for monitoring and service discovery. This service should be simple, reliable, and follow FastAPI best practices.",
+  "inputs": [
+    "FastAPI framework for web service",
+    "Pydantic for data validation and serialization",
+    "Uvicorn for ASGI server",
+    "Pytest for testing framework"
+  ],
+  "deliverables": [
+    "FastAPI service with /health endpoint in services/healthsvc/",
+    "Unit tests with comprehensive coverage", 
+    "README.md documentation with usage instructions"
+  ],
+  "acceptance_criteria": [
+    "/health endpoint returns HTTP 200 status code",
+    "Health response includes status, timestamp, and version fields",
+    "Service responds with proper JSON content-type headers",
+    "All tests pass with minimum 85% code coverage",
+    "Service can be started with uvicorn command",
+    "Documentation includes API endpoint descriptions and examples"
+  ],
+  "definition_of_done": [
+    "ruff+black clean",
+    "mypy passes",
+    "pytest passes",
+    "coverage >= 85% on changed lines", 
+    "docs updated if behavior changed"
+  ],
+  "risk_checks": [
+    "performance risks?",
+    "security validation?",
+    "edge cases & failure paths?"
+  ],
+  "run_instructions": [
+    "uvicorn services.healthsvc.main:app --reload --port 8000",
+    "pytest tests/test_healthsvc.py --cov=services.healthsvc --cov-report=html"
+  ],
+  "timebox_hours": 2.0
+}

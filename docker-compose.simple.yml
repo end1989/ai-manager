@@ -1,0 +1,41 @@
+# Simple Docker Compose - SQLite only for basic deployment
+version: '3.8'
+
+services:
+  # Main AI Manager Application
+  ai-manager:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: ai-manager
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      - DATABASE_URL=sqlite:///./manager.db
+      - ENVIRONMENT=production
+      - DEBUG=false
+      - LOG_LEVEL=INFO
+      - SECRET_KEY=${SECRET_KEY:-auto-generated-secret-key-change-in-production}
+      - JWT_SECRET_KEY=${JWT_SECRET_KEY:-auto-generated-jwt-secret-change-in-production}
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-mock-openai-key}
+      - ANTHROPIC_API_KEY=${ANTHROPIC_API_KEY:-mock-anthropic-key}
+      - LLM_PROVIDER=${LLM_PROVIDER:-mock}
+      - WORKER_CONCURRENCY=2
+      - MAX_CONCURRENT_TASKS=3
+    volumes:
+      - ./data:/app/data
+      - ./logs:/app/logs
+      - ./artifacts:/app/artifacts
+      - ./runs:/app/runs
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+volumes:
+  data:
+    driver: local

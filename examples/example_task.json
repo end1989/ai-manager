@@ -1,0 +1,49 @@
+{
+  "task_id": "TASK-001",
+  "title": "Create a Simple Calculator Module",
+  "goal": "Build a Python calculator module with basic arithmetic operations and comprehensive tests",
+  "background": "We need a reusable calculator module for our applications that supports addition, subtraction, multiplication, division, and power operations with proper error handling.",
+  "inputs": [
+    "Python 3.8+",
+    "pytest for testing",
+    "Standard library only"
+  ],
+  "deliverables": [
+    "calculator.py module with Calculator class",
+    "test_calculator.py with comprehensive tests",
+    "README.md with usage examples",
+    "requirements.txt if needed"
+  ],
+  "acceptance_criteria": [
+    "Calculator class supports +, -, *, /, ** operations",
+    "Proper error handling for division by zero",
+    "Type hints throughout the code",
+    "Tests achieve >90% coverage",
+    "Code passes ruff and black formatting",
+    "All docstrings follow Google style"
+  ],
+  "definition_of_done": [
+    "All tests pass",
+    "Code coverage >= 90%",
+    "ruff check passes",
+    "black formatting applied",
+    "mypy type checking passes",
+    "Documentation is complete"
+  ],
+  "risk_checks": [
+    "Verify numeric edge cases (overflow, underflow)",
+    "Test with various input types (int, float, complex)",
+    "Validate error messages are user-friendly",
+    "Check performance with large numbers"
+  ],
+  "run_instructions": [
+    "Set up Python virtual environment",
+    "Install dependencies: pip install -r requirements.txt",
+    "Run tests: pytest test_calculator.py -v",
+    "Run linting: ruff check .",
+    "Format code: black .",
+    "Type check: mypy calculator.py",
+    "Verify documentation: python -c 'import calculator; help(calculator.Calculator)'"
+  ],
+  "timebox_hours": 2.0
+}
