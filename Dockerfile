@@ -70,8 +70,8 @@ USER root
 # Install additional testing tools
 RUN pip install pytest-cov pytest-xdist pytest-timeout locust
 
-# Copy test configurations
-COPY pytest.ini .coveragerc ./
+# Copy test configurations (if they exist)
+# COPY pytest.ini .coveragerc ./
 
 # Create test directories
 RUN mkdir -p /app/test-results /app/coverage-reports
@@ -147,17 +147,5 @@ EXPOSE 8000
 # Production command
 CMD ["python", "-m", "cli.api_cli", "--host", "0.0.0.0", "--port", "8000"]
 
-# Stage 7: Monitoring sidecar (optional)
-FROM alpine:latest as monitoring
-
-# Install monitoring tools
-RUN apk add --no-cache \
-    curl \
-    jq \
-    prometheus-node-exporter
-
-# Copy monitoring scripts
-COPY monitoring/ /opt/monitoring/
-
-# Monitoring entrypoint
-CMD ["/opt/monitoring/start-monitoring.sh"]
+# Note: Monitoring stage removed for simplified deployment
+# Can be re-added later when monitoring directory is created
