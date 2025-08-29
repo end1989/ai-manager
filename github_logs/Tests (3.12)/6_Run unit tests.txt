@@ -1,0 +1,64 @@
+﻿2025-08-29T23:36:06.9436694Z ##[group]Run pytest tests/unit/ -v --cov=src --cov-report=xml --cov-report=term-missing
+2025-08-29T23:36:06.9437531Z [36;1mpytest tests/unit/ -v --cov=src --cov-report=xml --cov-report=term-missing[0m
+2025-08-29T23:36:06.9469199Z shell: /usr/bin/bash -e {0}
+2025-08-29T23:36:06.9469440Z env:
+2025-08-29T23:36:06.9469682Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:36:06.9470097Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
+2025-08-29T23:36:06.9470497Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:36:06.9470843Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:36:06.9471194Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:36:06.9471531Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
+2025-08-29T23:36:06.9471818Z ##[endgroup]
+2025-08-29T23:36:08.0086850Z ============================= test session starts ==============================
+2025-08-29T23:36:08.0095584Z platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.11/x64/bin/python
+2025-08-29T23:36:08.0096529Z cachedir: .pytest_cache
+2025-08-29T23:36:08.0096956Z rootdir: /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:36:08.0097460Z configfile: pyproject.toml
+2025-08-29T23:36:08.0097896Z plugins: asyncio-1.1.0, anyio-4.10.0, cov-6.2.1
+2025-08-29T23:36:08.0098675Z asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+2025-08-29T23:36:09.4827742Z collecting ... collected 39 items / 1 error
+2025-08-29T23:36:09.4829774Z 
+2025-08-29T23:36:09.4831245Z ==================================== ERRORS ====================================
+2025-08-29T23:36:09.4833642Z _______________ ERROR collecting tests/unit/test_review_rules.py _______________
+2025-08-29T23:36:09.4834611Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/python.py:498: in importtestmodule
+2025-08-29T23:36:09.4835635Z     mod = import_path(
+2025-08-29T23:36:09.4836319Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/pathlib.py:587: in import_path
+2025-08-29T23:36:09.4837082Z     importlib.import_module(module_name)
+2025-08-29T23:36:09.4837785Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/importlib/__init__.py:90: in import_module
+2025-08-29T23:36:09.4838535Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-08-29T23:36:09.4838989Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:36:09.4839411Z <frozen importlib._bootstrap>:1387: in _gcd_import
+2025-08-29T23:36:09.4839803Z     ???
+2025-08-29T23:36:09.4840096Z <frozen importlib._bootstrap>:1360: in _find_and_load
+2025-08-29T23:36:09.4840484Z     ???
+2025-08-29T23:36:09.4840829Z <frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+2025-08-29T23:36:09.4841258Z     ???
+2025-08-29T23:36:09.4841540Z <frozen importlib._bootstrap>:935: in _load_unlocked
+2025-08-29T23:36:09.4841927Z     ???
+2025-08-29T23:36:09.4842567Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:177: in exec_module
+2025-08-29T23:36:09.4843385Z     source_stat, co = _rewrite_test(fn, self.config)
+2025-08-29T23:36:09.4843786Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:36:09.4844535Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:357: in _rewrite_test
+2025-08-29T23:36:09.4845453Z     tree = ast.parse(source, filename=strfn)
+2025-08-29T23:36:09.4845827Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:36:09.4846348Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/ast.py:52: in parse
+2025-08-29T23:36:09.4846913Z     return compile(source, filename, mode, flags,
+2025-08-29T23:36:09.4847628Z E     File "/home/runner/work/ai-manager/ai-manager/tests/unit/test_review_rules.py", line 291
+2025-08-29T23:36:09.4848185Z E       '''
+2025-08-29T23:36:09.4848395Z E       ^
+2025-08-29T23:36:09.4848818Z E   SyntaxError: unterminated triple-quoted string literal (detected at line 298)
+2025-08-29T23:36:09.4850177Z =============================== warnings summary ===============================
+2025-08-29T23:36:09.4850625Z tests/unit/test_database_operations_real.py:23
+2025-08-29T23:36:09.4852248Z   /home/runner/work/ai-manager/ai-manager/tests/unit/test_database_operations_real.py:23: PytestUnknownMarkWarning: Unknown pytest.mark.database - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+2025-08-29T23:36:09.4853768Z     @pytest.mark.database
+2025-08-29T23:36:09.4853972Z 
+2025-08-29T23:36:09.4854106Z src/manager/core/schemas.py:87
+2025-08-29T23:36:09.4855254Z   /home/runner/work/ai-manager/ai-manager/src/manager/core/schemas.py:87: PytestCollectionWarning: cannot collect test class 'TestResults' because it has a __init__ constructor (from: tests/unit/test_schemas.py)
+2025-08-29T23:36:09.4856651Z     class TestResults(BaseModel):
+2025-08-29T23:36:09.4856886Z 
+2025-08-29T23:36:09.4857163Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2025-08-29T23:36:09.4857743Z =========================== short test summary info ============================
+2025-08-29T23:36:09.4858178Z ERROR tests/unit/test_review_rules.py
+2025-08-29T23:36:09.4858612Z !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+2025-08-29T23:36:09.4859123Z ========================= 2 warnings, 1 error in 1.32s =========================
+2025-08-29T23:36:09.6540284Z ##[error]Process completed with exit code 2.

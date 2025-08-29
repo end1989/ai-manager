@@ -1,0 +1,15 @@
+﻿2025-08-29T23:36:00.8533843Z ##[group]Run safety check --json --output safety-report.json || true
+2025-08-29T23:36:00.8534679Z [36;1msafety check --json --output safety-report.json || true[0m
+2025-08-29T23:36:00.8578678Z shell: /usr/bin/bash -e {0}
+2025-08-29T23:36:00.8579068Z env:
+2025-08-29T23:36:00.8579477Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:00.8580217Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+2025-08-29T23:36:00.8581196Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:00.8581882Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:00.8582569Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:00.8583246Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+2025-08-29T23:36:00.8583778Z ##[endgroup]
+2025-08-29T23:36:03.0249217Z Usage: safety check [OPTIONS]
+2025-08-29T23:36:03.0251383Z Try 'safety check --help' for help.
+2025-08-29T23:36:03.0253630Z 
+2025-08-29T23:36:03.0254197Z Error: Invalid value for '--output' / '-o': 'safety-report.json' is not one of 'screen', 'text', 'json', 'bare', 'html'.

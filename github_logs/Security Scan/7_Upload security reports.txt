@@ -1,0 +1,31 @@
+﻿2025-08-29T23:36:03.1785331Z ##[group]Run actions/upload-artifact@v4
+2025-08-29T23:36:03.1785623Z with:
+2025-08-29T23:36:03.1785794Z   name: security-reports
+2025-08-29T23:36:03.1786039Z   path: bandit-report.json
+safety-report.json
+
+2025-08-29T23:36:03.1786312Z   if-no-files-found: warn
+2025-08-29T23:36:03.1786532Z   compression-level: 6
+2025-08-29T23:36:03.1786720Z   overwrite: false
+2025-08-29T23:36:03.1786918Z   include-hidden-files: false
+2025-08-29T23:36:03.1787121Z env:
+2025-08-29T23:36:03.1787336Z   pythonLocation: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:03.1787729Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib/pkgconfig
+2025-08-29T23:36:03.1788108Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:03.1788445Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:03.1788782Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.11.13/x64
+2025-08-29T23:36:03.1789128Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.11.13/x64/lib
+2025-08-29T23:36:03.1789439Z ##[endgroup]
+2025-08-29T23:36:03.3960275Z Multiple search paths detected. Calculating the least common ancestor of all paths
+2025-08-29T23:36:03.3964565Z The least common ancestor is /home/runner/work/ai-manager/ai-manager. This will be the root directory of the artifact
+2025-08-29T23:36:03.3965869Z With the provided path, there will be 1 file uploaded
+2025-08-29T23:36:03.3970647Z Artifact name is valid!
+2025-08-29T23:36:03.3973220Z Root directory input is valid!
+2025-08-29T23:36:03.5132389Z Beginning upload of artifact content to blob storage
+2025-08-29T23:36:03.5877438Z Uploaded bytes 1960
+2025-08-29T23:36:03.6113576Z Finished uploading artifact content to blob storage!
+2025-08-29T23:36:03.6117441Z SHA256 digest of uploaded artifact zip is 9704b8813e7d9d6dbc6597710cb437b0e8572535657def6f1b05fb905758c89c
+2025-08-29T23:36:03.6119866Z Finalizing artifact upload
+2025-08-29T23:36:03.6939215Z Artifact security-reports.zip successfully finalized. Artifact ID 3887442738
+2025-08-29T23:36:03.6942808Z Artifact security-reports has been successfully uploaded! Final size is 1960 bytes. Artifact ID is 3887442738
+2025-08-29T23:36:03.6953730Z Artifact download URL: https://github.com/end1989/ai-manager/actions/runs/17336343727/artifacts/3887442738
