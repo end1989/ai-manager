@@ -217,17 +217,17 @@ jobs:
       run: |
         echo "Running basic performance validation..."
         python -c "
-import httpx
-import time
-# Test basic import performance
-start = time.time()
-import sys
-sys.path.insert(0, 'src')
-import manager
-elapsed = time.time() - start
-print(f'✅ Import performance: {elapsed:.3f}s')
-assert elapsed < 5.0, 'Import too slow'
-"
+        import httpx
+        import time
+        # Test basic import performance
+        start = time.time()
+        import sys
+        sys.path.insert(0, 'src')
+        import manager
+        elapsed = time.time() - start
+        print(f'✅ Import performance: {elapsed:.3f}s')
+        assert elapsed < 5.0, 'Import too slow'
+        "
 
   # Release (only on main branch)
   release:
