@@ -100,10 +100,9 @@ async def test_code_quality_checks(review_engine, temp_workdir):
     py_file.write_text('''
 def very_long_function():
     # TODO: This function is too long
-    """ '''+'''
+    """
     This function has way too many lines and should be refactored.
-    '''+'''
-    """ + "".join([f"line_{i}\n" for i in range(60)]) + '''
+    """ + "".join([f"line_{i}\n" for i in range(60)]) + """
     return "done"
 
 def another_function():
