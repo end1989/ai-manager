@@ -83,14 +83,14 @@ jobs:
       run: |
         # Test basic package functionality
         python -c "
-import sys
-sys.path.insert(0, 'src')
-import manager
-from manager.core.schemas import TaskSpec
-from manager.config import settings
-print('✅ Core imports working')
-print('✅ Config loaded:', settings.environment)
-"
+        import sys
+        sys.path.insert(0, 'src')
+        import manager
+        from manager.core.schemas import TaskSpec
+        from manager.config import settings
+        print('✅ Core imports working')
+        print('✅ Config loaded:', settings.environment)
+        "
         
         # Run existing tests if they exist
         if [ -d "tests/unit" ] && [ "$(ls -A tests/unit)" ]; then
