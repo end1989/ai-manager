@@ -89,7 +89,7 @@ jobs:
         from manager.core.schemas import TaskSpec
         from manager.config import settings
         print('✅ Core imports working')
-        print('✅ Config loaded:', settings.environment)
+        print('✅ Config loaded, log level:', settings.log_level)
         "
         
         # Run only basic tests to avoid database conflicts in CI
