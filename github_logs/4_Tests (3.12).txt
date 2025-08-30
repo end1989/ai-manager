@@ -1,0 +1,388 @@
+﻿2025-08-29T23:43:19.8432926Z Current runner version: '2.328.0'
+2025-08-29T23:43:19.8506781Z ##[group]Runner Image Provisioner
+2025-08-29T23:43:19.8508051Z Hosted Compute Agent
+2025-08-29T23:43:19.8508975Z Version: 20250829.383
+2025-08-29T23:43:19.8512295Z Commit: 27cb235aab5b0e52e153a26cd86b4742e89dac5d
+2025-08-29T23:43:19.8513442Z Build Date: 2025-08-29T13:48:48Z
+2025-08-29T23:43:19.8514411Z ##[endgroup]
+2025-08-29T23:43:19.8515398Z ##[group]Operating System
+2025-08-29T23:43:19.8516312Z Ubuntu
+2025-08-29T23:43:19.8517328Z 24.04.3
+2025-08-29T23:43:19.8518243Z LTS
+2025-08-29T23:43:19.8519083Z ##[endgroup]
+2025-08-29T23:43:19.8540376Z ##[group]Runner Image
+2025-08-29T23:43:19.8541423Z Image: ubuntu-24.04
+2025-08-29T23:43:19.8542264Z Version: 20250824.1.0
+2025-08-29T23:43:19.8544208Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20250824.1/images/ubuntu/Ubuntu2404-Readme.md
+2025-08-29T23:43:19.8547091Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20250824.1
+2025-08-29T23:43:19.8549044Z ##[endgroup]
+2025-08-29T23:43:19.8551277Z ##[group]GITHUB_TOKEN Permissions
+2025-08-29T23:43:19.8553726Z Contents: read
+2025-08-29T23:43:19.8554736Z Metadata: read
+2025-08-29T23:43:19.8555568Z Packages: read
+2025-08-29T23:43:19.8556317Z ##[endgroup]
+2025-08-29T23:43:19.8559786Z Secret source: Actions
+2025-08-29T23:43:19.8561004Z Prepare workflow directory
+2025-08-29T23:43:19.9516323Z Prepare all required actions
+2025-08-29T23:43:19.9623819Z Getting action download info
+2025-08-29T23:43:20.3560005Z Download action repository 'actions/checkout@v4' (SHA:08eba0b27e820071cde6df949e0beb9ba4906955)
+2025-08-29T23:43:20.4309540Z Download action repository 'actions/setup-python@v4' (SHA:7f4fc3e22c37d6ff65e88745f38bd3157c663f7c)
+2025-08-29T23:43:20.5191030Z Download action repository 'actions/cache@v3' (SHA:2f8e54208210a422b2efd51efaa6bd6d7ca8920f)
+2025-08-29T23:43:20.6674025Z Download action repository 'codecov/codecov-action@v3' (SHA:ab904c41d6ece82784817410c45d8b8c02684457)
+2025-08-29T23:43:21.0104230Z Complete job name: Tests (3.12)
+2025-08-29T23:43:21.0696755Z ##[group]Run actions/checkout@v4
+2025-08-29T23:43:21.0697577Z with:
+2025-08-29T23:43:21.0697955Z   repository: end1989/ai-manager
+2025-08-29T23:43:21.0698587Z   token: ***
+2025-08-29T23:43:21.0698952Z   ssh-strict: true
+2025-08-29T23:43:21.0699722Z   ssh-user: git
+2025-08-29T23:43:21.0700131Z   persist-credentials: true
+2025-08-29T23:43:21.0700583Z   clean: true
+2025-08-29T23:43:21.0700963Z   sparse-checkout-cone-mode: true
+2025-08-29T23:43:21.0701420Z   fetch-depth: 1
+2025-08-29T23:43:21.0701804Z   fetch-tags: false
+2025-08-29T23:43:21.0702179Z   show-progress: true
+2025-08-29T23:43:21.0702572Z   lfs: false
+2025-08-29T23:43:21.0702924Z   submodules: false
+2025-08-29T23:43:21.0703317Z   set-safe-directory: true
+2025-08-29T23:43:21.0704044Z ##[endgroup]
+2025-08-29T23:43:21.1841508Z Syncing repository: end1989/ai-manager
+2025-08-29T23:43:21.1844087Z ##[group]Getting Git version info
+2025-08-29T23:43:21.1845268Z Working directory is '/home/runner/work/ai-manager/ai-manager'
+2025-08-29T23:43:21.1858774Z [command]/usr/bin/git version
+2025-08-29T23:43:21.1936367Z git version 2.51.0
+2025-08-29T23:43:21.1967166Z ##[endgroup]
+2025-08-29T23:43:21.1983824Z Temporarily overriding HOME='/home/runner/work/_temp/4854b4d6-82f6-43ae-a788-bb8c1e414aff' before making global git config changes
+2025-08-29T23:43:21.1990864Z Adding repository directory to the temporary git global config as a safe directory
+2025-08-29T23:43:21.1992813Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:21.2036572Z Deleting the contents of '/home/runner/work/ai-manager/ai-manager'
+2025-08-29T23:43:21.2042666Z ##[group]Initializing the repository
+2025-08-29T23:43:21.2047959Z [command]/usr/bin/git init /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:21.2126687Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-08-29T23:43:21.2128805Z hint: is subject to change. To configure the initial branch name to use in all
+2025-08-29T23:43:21.2137004Z hint: of your new repositories, which will suppress this warning, call:
+2025-08-29T23:43:21.2143093Z hint:
+2025-08-29T23:43:21.2143861Z hint: 	git config --global init.defaultBranch <name>
+2025-08-29T23:43:21.2144768Z hint:
+2025-08-29T23:43:21.2145619Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-08-29T23:43:21.2146822Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-08-29T23:43:21.2147486Z hint:
+2025-08-29T23:43:21.2147835Z hint: 	git branch -m <name>
+2025-08-29T23:43:21.2148253Z hint:
+2025-08-29T23:43:21.2148801Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-08-29T23:43:21.2150056Z Initialized empty Git repository in /home/runner/work/ai-manager/ai-manager/.git/
+2025-08-29T23:43:21.2151570Z [command]/usr/bin/git remote add origin https://github.com/end1989/ai-manager
+2025-08-29T23:43:21.2185132Z ##[endgroup]
+2025-08-29T23:43:21.2187668Z ##[group]Disabling automatic garbage collection
+2025-08-29T23:43:21.2190215Z [command]/usr/bin/git config --local gc.auto 0
+2025-08-29T23:43:21.2224365Z ##[endgroup]
+2025-08-29T23:43:21.2225545Z ##[group]Setting up auth
+2025-08-29T23:43:21.2232313Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-08-29T23:43:21.2265664Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-08-29T23:43:21.2546404Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-08-29T23:43:21.2580666Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-08-29T23:43:21.2815781Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-08-29T23:43:21.2854971Z ##[endgroup]
+2025-08-29T23:43:21.2856879Z ##[group]Fetching the repository
+2025-08-29T23:43:21.2865993Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a93b2371421b66cab483261d7bd6a1505c5842cd:refs/remotes/origin/main
+2025-08-29T23:43:21.6544256Z From https://github.com/end1989/ai-manager
+2025-08-29T23:43:21.6580795Z  * [new ref]         a93b2371421b66cab483261d7bd6a1505c5842cd -> origin/main
+2025-08-29T23:43:21.6597895Z ##[endgroup]
+2025-08-29T23:43:21.6600022Z ##[group]Determining the checkout info
+2025-08-29T23:43:21.6601830Z ##[endgroup]
+2025-08-29T23:43:21.6610446Z [command]/usr/bin/git sparse-checkout disable
+2025-08-29T23:43:21.6680463Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-08-29T23:43:21.6743128Z ##[group]Checking out the ref
+2025-08-29T23:43:21.6747188Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-08-29T23:43:21.7462336Z Switched to a new branch 'main'
+2025-08-29T23:43:21.7470289Z branch 'main' set up to track 'origin/main'.
+2025-08-29T23:43:21.7482545Z ##[endgroup]
+2025-08-29T23:43:21.7520910Z [command]/usr/bin/git log -1 --format=%H
+2025-08-29T23:43:21.7544734Z a93b2371421b66cab483261d7bd6a1505c5842cd
+2025-08-29T23:43:21.7928910Z ##[group]Run actions/setup-python@v4
+2025-08-29T23:43:21.7930866Z with:
+2025-08-29T23:43:21.7932136Z   python-version: 3.12
+2025-08-29T23:43:21.7933605Z   check-latest: false
+2025-08-29T23:43:21.7935396Z   token: ***
+2025-08-29T23:43:21.7936716Z   update-environment: true
+2025-08-29T23:43:21.7938256Z   allow-prereleases: false
+2025-08-29T23:43:21.7939936Z ##[endgroup]
+2025-08-29T23:43:22.0141339Z ##[group]Installed versions
+2025-08-29T23:43:22.0230138Z Successfully set up CPython (3.12.11)
+2025-08-29T23:43:22.0239780Z ##[endgroup]
+2025-08-29T23:43:22.0961841Z ##[group]Run actions/cache@v3
+2025-08-29T23:43:22.0962805Z with:
+2025-08-29T23:43:22.0963528Z   path: ~/.cache/pip
+2025-08-29T23:43:22.0965129Z   key: Linux-pip-9a7649758733b5d10150ec297aac1235c596851e8d58484f072a0c5cdd1ec0be
+2025-08-29T23:43:22.0966647Z   restore-keys: Linux-pip-
+
+2025-08-29T23:43:22.0967618Z   enableCrossOsArchive: false
+2025-08-29T23:43:22.0968554Z   fail-on-cache-miss: false
+2025-08-29T23:43:22.0969716Z   lookup-only: false
+2025-08-29T23:43:22.0970507Z env:
+2025-08-29T23:43:22.0971421Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.0972947Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
+2025-08-29T23:43:22.0974450Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.0975817Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.0977168Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.0978595Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
+2025-08-29T23:43:22.0980167Z ##[endgroup]
+2025-08-29T23:43:22.3423976Z Cache not found for input keys: Linux-pip-9a7649758733b5d10150ec297aac1235c596851e8d58484f072a0c5cdd1ec0be, Linux-pip-
+2025-08-29T23:43:22.3510416Z ##[group]Run python -m pip install --upgrade pip
+2025-08-29T23:43:22.3510948Z [36;1mpython -m pip install --upgrade pip[0m
+2025-08-29T23:43:22.3511285Z [36;1mpip install -e .[dev][0m
+2025-08-29T23:43:22.3603702Z shell: /usr/bin/bash -e {0}
+2025-08-29T23:43:22.3604015Z env:
+2025-08-29T23:43:22.3604306Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.3604759Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
+2025-08-29T23:43:22.3605193Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.3605580Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.3605972Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:22.3606360Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
+2025-08-29T23:43:22.3606682Z ##[endgroup]
+2025-08-29T23:43:24.6131209Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages (25.2)
+2025-08-29T23:43:25.6123474Z Obtaining file:///home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:25.6144411Z   Installing build dependencies: started
+2025-08-29T23:43:26.5092568Z   Installing build dependencies: finished with status 'done'
+2025-08-29T23:43:26.5099714Z   Checking if build backend supports build_editable: started
+2025-08-29T23:43:26.8638840Z   Checking if build backend supports build_editable: finished with status 'done'
+2025-08-29T23:43:26.8656749Z   Getting requirements to build editable: started
+2025-08-29T23:43:27.2159397Z   Getting requirements to build editable: finished with status 'done'
+2025-08-29T23:43:27.2170226Z   Preparing editable metadata (pyproject.toml): started
+2025-08-29T23:43:27.4194178Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2025-08-29T23:43:27.5330481Z Collecting fastapi>=0.104.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.5766929Z   Downloading fastapi-0.116.1-py3-none-any.whl.metadata (28 kB)
+2025-08-29T23:43:27.6258955Z Collecting uvicorn>=0.24.0 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:27.6337270Z   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+2025-08-29T23:43:27.6559779Z Collecting sqlmodel>=0.0.14 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.6646723Z   Downloading sqlmodel-0.0.24-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:27.8061789Z Collecting pydantic>=2.5.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.8149480Z   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+2025-08-29T23:43:27.8464843Z Collecting pydantic-settings>=2.1.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.8538555Z   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+2025-08-29T23:43:27.8800050Z Collecting typer>=0.9.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.8880078Z   Downloading typer-0.16.1-py3-none-any.whl.metadata (15 kB)
+2025-08-29T23:43:27.9374173Z Collecting rich>=13.7.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.9453358Z   Downloading rich-14.1.0-py3-none-any.whl.metadata (18 kB)
+2025-08-29T23:43:28.0263861Z Collecting psutil>=5.9.6 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.0343355Z   Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)
+2025-08-29T23:43:28.0577208Z Collecting aiofiles>=23.2.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.0652676Z   Downloading aiofiles-24.1.0-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:28.1088434Z Collecting pytest>=7.4.3 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.1171853Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+2025-08-29T23:43:28.1482499Z Collecting pytest-cov>=4.1.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.1565318Z   Downloading pytest_cov-6.2.1-py3-none-any.whl.metadata (30 kB)
+2025-08-29T23:43:28.1876597Z Collecting pytest-asyncio>=0.21.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.1955194Z   Downloading pytest_asyncio-1.1.0-py3-none-any.whl.metadata (4.1 kB)
+2025-08-29T23:43:28.5589792Z Collecting ruff>=0.1.6 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.5672996Z   Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2025-08-29T23:43:28.6195619Z Collecting black>=23.11.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.6263248Z   Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl.metadata (81 kB)
+2025-08-29T23:43:28.7570780Z Collecting mypy>=1.7.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.7645231Z   Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.2 kB)
+2025-08-29T23:43:28.7907767Z Collecting httpx>=0.25.2 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.7983596Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2025-08-29T23:43:28.8286217Z Collecting click>=8.0.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.8361375Z   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+2025-08-29T23:43:28.8513071Z Collecting mypy-extensions>=0.4.3 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.8587292Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2025-08-29T23:43:28.8798338Z Collecting packaging>=22.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.8872371Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-08-29T23:43:28.9052736Z Collecting pathspec>=0.9.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9127656Z   Downloading pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
+2025-08-29T23:43:28.9420288Z Collecting platformdirs>=2 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9495193Z   Downloading platformdirs-4.4.0-py3-none-any.whl.metadata (12 kB)
+2025-08-29T23:43:28.9880125Z Collecting starlette<0.48.0,>=0.40.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9957052Z   Downloading starlette-0.47.3-py3-none-any.whl.metadata (6.2 kB)
+2025-08-29T23:43:29.0483890Z Collecting typing-extensions>=4.8.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.0556827Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2025-08-29T23:43:29.0754482Z Collecting annotated-types>=0.6.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.0826750Z   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2025-08-29T23:43:29.7547601Z Collecting pydantic-core==2.33.2 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.7624720Z   Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-08-29T23:43:29.7810111Z Collecting typing-inspection>=0.4.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.7880532Z   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+2025-08-29T23:43:29.8176506Z Collecting anyio<5,>=3.6.2 (from starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8262651Z   Downloading anyio-4.10.0-py3-none-any.whl.metadata (4.0 kB)
+2025-08-29T23:43:29.8507798Z Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8578667Z   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:29.8735971Z Collecting sniffio>=1.1 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8809611Z   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2025-08-29T23:43:29.9141455Z Collecting certifi (from httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:29.9211878Z   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
+2025-08-29T23:43:29.9510056Z Collecting httpcore==1.* (from httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:29.9595940Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2025-08-29T23:43:29.9770099Z Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:29.9842659Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2025-08-29T23:43:30.0326431Z Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.1.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.0404621Z   Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+2025-08-29T23:43:30.0600500Z Collecting iniconfig>=1 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.0693935Z   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+2025-08-29T23:43:30.0916802Z Collecting pluggy<2,>=1.5 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.1015647Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2025-08-29T23:43:30.1274117Z Collecting pygments>=2.7.2 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.1345700Z   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+2025-08-29T23:43:30.4937020Z Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov>=4.1.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.5012784Z   Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.9 kB)
+2025-08-29T23:43:30.5300585Z Collecting markdown-it-py>=2.2.0 (from rich>=13.7.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.5378458Z   Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+2025-08-29T23:43:30.5628758Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.7.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.5703043Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2025-08-29T23:43:30.8955052Z Collecting SQLAlchemy<2.1.0,>=2.0.14 (from sqlmodel>=0.0.14->ai-manager==0.1.0)
+2025-08-29T23:43:30.9031405Z   Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+2025-08-29T23:43:31.0580372Z Collecting greenlet>=1 (from SQLAlchemy<2.1.0,>=2.0.14->sqlmodel>=0.0.14->ai-manager==0.1.0)
+2025-08-29T23:43:31.0660362Z   Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (4.1 kB)
+2025-08-29T23:43:31.0966913Z Collecting shellingham>=1.3.0 (from typer>=0.9.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.1032366Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+2025-08-29T23:43:31.1660144Z Collecting httptools>=0.6.3 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.1736674Z   Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.6 kB)
+2025-08-29T23:43:31.2146318Z Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.2216939Z   Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+2025-08-29T23:43:31.2681537Z Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.2773217Z   Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2025-08-29T23:43:31.3538602Z Collecting watchfiles>=0.13 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.3618348Z   Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2025-08-29T23:43:31.4527468Z Collecting websockets>=10.4 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.4608425Z   Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-08-29T23:43:31.4867668Z Downloading aiofiles-24.1.0-py3-none-any.whl (15 kB)
+2025-08-29T23:43:31.4986711Z Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl (1.8 MB)
+2025-08-29T23:43:31.5234393Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 94.1 MB/s  0:00:00
+2025-08-29T23:43:31.5311774Z Downloading click-8.2.1-py3-none-any.whl (102 kB)
+2025-08-29T23:43:31.5409493Z Downloading fastapi-0.116.1-py3-none-any.whl (95 kB)
+2025-08-29T23:43:31.5546255Z Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+2025-08-29T23:43:31.5658289Z Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+2025-08-29T23:43:31.5795716Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 157.5 MB/s  0:00:00
+2025-08-29T23:43:31.5867473Z Downloading starlette-0.47.3-py3-none-any.whl (72 kB)
+2025-08-29T23:43:31.5970101Z Downloading anyio-4.10.0-py3-none-any.whl (107 kB)
+2025-08-29T23:43:31.6090270Z Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2025-08-29T23:43:31.6195351Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2025-08-29T23:43:31.6293169Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2025-08-29T23:43:31.6392288Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2025-08-29T23:43:31.6488093Z Downloading idna-3.10-py3-none-any.whl (70 kB)
+2025-08-29T23:43:31.6591407Z Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (12.7 MB)
+2025-08-29T23:43:31.7360547Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 169.9 MB/s  0:00:00
+2025-08-29T23:43:31.7434872Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2025-08-29T23:43:31.7541300Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
+2025-08-29T23:43:31.7642982Z Downloading pathspec-0.12.1-py3-none-any.whl (31 kB)
+2025-08-29T23:43:31.7738584Z Downloading platformdirs-4.4.0-py3-none-any.whl (18 kB)
+2025-08-29T23:43:31.7837982Z Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (277 kB)
+2025-08-29T23:43:31.7951359Z Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
+2025-08-29T23:43:31.8068115Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+2025-08-29T23:43:31.8183438Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2025-08-29T23:43:31.8284370Z Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+2025-08-29T23:43:31.8425644Z Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+2025-08-29T23:43:31.8525756Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 144.7 MB/s  0:00:00
+2025-08-29T23:43:31.8600434Z Downloading pytest_asyncio-1.1.0-py3-none-any.whl (15 kB)
+2025-08-29T23:43:31.8710083Z Downloading pytest_cov-6.2.1-py3-none-any.whl (24 kB)
+2025-08-29T23:43:31.8798721Z Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (251 kB)
+2025-08-29T23:43:31.8911840Z Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+2025-08-29T23:43:31.9005741Z Downloading rich-14.1.0-py3-none-any.whl (243 kB)
+2025-08-29T23:43:31.9105602Z Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+2025-08-29T23:43:31.9200245Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2025-08-29T23:43:31.9300225Z Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.2 MB)
+2025-08-29T23:43:31.9876700Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 234.6 MB/s  0:00:00
+2025-08-29T23:43:31.9952095Z Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+2025-08-29T23:43:32.0051750Z Downloading sqlmodel-0.0.24-py3-none-any.whl (28 kB)
+2025-08-29T23:43:32.0168318Z Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+2025-08-29T23:43:32.0358950Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 193.8 MB/s  0:00:00
+2025-08-29T23:43:32.0436995Z Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (607 kB)
+2025-08-29T23:43:32.0505878Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 607.6/607.6 kB 87.2 MB/s  0:00:00
+2025-08-29T23:43:32.0588172Z Downloading typer-0.16.1-py3-none-any.whl (46 kB)
+2025-08-29T23:43:32.0690256Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+2025-08-29T23:43:32.0786419Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2025-08-29T23:43:32.0886743Z Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+2025-08-29T23:43:32.0982972Z Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+2025-08-29T23:43:32.1087558Z Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (510 kB)
+2025-08-29T23:43:32.1203998Z Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (767 kB)
+2025-08-29T23:43:32.1281343Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 767.5/767.5 kB 108.9 MB/s  0:00:00
+2025-08-29T23:43:32.1350294Z Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+2025-08-29T23:43:32.1577027Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 223.6 MB/s  0:00:00
+2025-08-29T23:43:32.1652257Z Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (452 kB)
+2025-08-29T23:43:32.1794614Z Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (182 kB)
+2025-08-29T23:43:32.1893560Z Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
+2025-08-29T23:43:32.2706883Z Building wheels for collected packages: ai-manager
+2025-08-29T23:43:32.2716716Z   Building editable for ai-manager (pyproject.toml): started
+2025-08-29T23:43:32.5059160Z   Building editable for ai-manager (pyproject.toml): finished with status 'done'
+2025-08-29T23:43:32.5065723Z   Created wheel for ai-manager: filename=ai_manager-0.1.0-0.editable-py3-none-any.whl size=5245 sha256=45583f310f900323f6d9ec47552b82feaab43ff3fa0ac96a40b0a4d677894951
+2025-08-29T23:43:32.5069483Z   Stored in directory: /tmp/pip-ephem-wheel-cache-qwlvx87u/wheels/f3/9a/49/1b264b4141d474e54b9bfd14c7283ca02ac62944f2b4010b6a
+2025-08-29T23:43:32.5103468Z Successfully built ai-manager
+2025-08-29T23:43:32.5955161Z Installing collected packages: websockets, uvloop, typing-extensions, sniffio, shellingham, ruff, pyyaml, python-dotenv, pygments, psutil, pluggy, platformdirs, pathspec, packaging, mypy-extensions, mdurl, iniconfig, idna, httptools, h11, greenlet, coverage, click, certifi, annotated-types, aiofiles, uvicorn, typing-inspection, SQLAlchemy, pytest, pydantic-core, mypy, markdown-it-py, httpcore, black, anyio, watchfiles, starlette, rich, pytest-cov, pytest-asyncio, pydantic, httpx, typer, sqlmodel, pydantic-settings, fastapi, ai-manager
+2025-08-29T23:43:38.5124709Z 
+2025-08-29T23:43:38.5176562Z Successfully installed SQLAlchemy-2.0.43 ai-manager-0.1.0 aiofiles-24.1.0 annotated-types-0.7.0 anyio-4.10.0 black-25.1.0 certifi-2025.8.3 click-8.2.1 coverage-7.10.6 fastapi-0.116.1 greenlet-3.2.4 h11-0.16.0 httpcore-1.0.9 httptools-0.6.4 httpx-0.28.1 idna-3.10 iniconfig-2.1.0 markdown-it-py-4.0.0 mdurl-0.1.2 mypy-1.17.1 mypy-extensions-1.1.0 packaging-25.0 pathspec-0.12.1 platformdirs-4.4.0 pluggy-1.6.0 psutil-7.0.0 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pytest-8.4.1 pytest-asyncio-1.1.0 pytest-cov-6.2.1 python-dotenv-1.1.1 pyyaml-6.0.2 rich-14.1.0 ruff-0.12.11 shellingham-1.5.4 sniffio-1.3.1 sqlmodel-0.0.24 starlette-0.47.3 typer-0.16.1 typing-extensions-4.15.0 typing-inspection-0.4.1 uvicorn-0.35.0 uvloop-0.21.0 watchfiles-1.1.0 websockets-15.0.1
+2025-08-29T23:43:38.9326658Z ##[group]Run pytest tests/unit/ -v --cov=src --cov-report=xml --cov-report=term-missing
+2025-08-29T23:43:38.9327461Z [36;1mpytest tests/unit/ -v --cov=src --cov-report=xml --cov-report=term-missing[0m
+2025-08-29T23:43:38.9360241Z shell: /usr/bin/bash -e {0}
+2025-08-29T23:43:38.9360463Z env:
+2025-08-29T23:43:38.9360697Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:38.9361112Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
+2025-08-29T23:43:38.9361506Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:38.9361853Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:38.9362199Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:38.9362535Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
+2025-08-29T23:43:38.9362827Z ##[endgroup]
+2025-08-29T23:43:40.3281002Z ============================= test session starts ==============================
+2025-08-29T23:43:40.3284778Z platform linux -- Python 3.12.11, pytest-8.4.1, pluggy-1.6.0 -- /opt/hostedtoolcache/Python/3.12.11/x64/bin/python
+2025-08-29T23:43:40.3285554Z cachedir: .pytest_cache
+2025-08-29T23:43:40.3285963Z rootdir: /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:40.3286441Z configfile: pyproject.toml
+2025-08-29T23:43:40.3286835Z plugins: asyncio-1.1.0, anyio-4.10.0, cov-6.2.1
+2025-08-29T23:43:40.3287611Z asyncio: mode=Mode.AUTO, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+2025-08-29T23:43:41.6190182Z collecting ... collected 39 items / 1 error
+2025-08-29T23:43:41.6192570Z 
+2025-08-29T23:43:41.6194001Z ==================================== ERRORS ====================================
+2025-08-29T23:43:41.6199690Z _______________ ERROR collecting tests/unit/test_review_rules.py _______________
+2025-08-29T23:43:41.6200606Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/python.py:498: in importtestmodule
+2025-08-29T23:43:41.6201380Z     mod = import_path(
+2025-08-29T23:43:41.6202252Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/pathlib.py:587: in import_path
+2025-08-29T23:43:41.6203665Z     importlib.import_module(module_name)
+2025-08-29T23:43:41.6204588Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/importlib/__init__.py:90: in import_module
+2025-08-29T23:43:41.6206472Z     return _bootstrap._gcd_import(name[level:], package, level)
+2025-08-29T23:43:41.6207112Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:43:41.6208628Z <frozen importlib._bootstrap>:1387: in _gcd_import
+2025-08-29T23:43:41.6209443Z     ???
+2025-08-29T23:43:41.6210877Z <frozen importlib._bootstrap>:1360: in _find_and_load
+2025-08-29T23:43:41.6211520Z     ???
+2025-08-29T23:43:41.6212950Z <frozen importlib._bootstrap>:1331: in _find_and_load_unlocked
+2025-08-29T23:43:41.6213607Z     ???
+2025-08-29T23:43:41.6214064Z <frozen importlib._bootstrap>:935: in _load_unlocked
+2025-08-29T23:43:41.6215526Z     ???
+2025-08-29T23:43:41.6216192Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:177: in exec_module
+2025-08-29T23:43:41.6217031Z     source_stat, co = _rewrite_test(fn, self.config)
+2025-08-29T23:43:41.6217456Z                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:43:41.6218229Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/_pytest/assertion/rewrite.py:357: in _rewrite_test
+2025-08-29T23:43:41.6219036Z     tree = ast.parse(source, filename=strfn)
+2025-08-29T23:43:41.6219572Z            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+2025-08-29T23:43:41.6220111Z /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/ast.py:52: in parse
+2025-08-29T23:43:41.6220704Z     return compile(source, filename, mode, flags,
+2025-08-29T23:43:41.6221347Z E     File "/home/runner/work/ai-manager/ai-manager/tests/unit/test_review_rules.py", line 291
+2025-08-29T23:43:41.6221929Z E       '''
+2025-08-29T23:43:41.6222165Z E       ^
+2025-08-29T23:43:41.6223192Z E   SyntaxError: unterminated triple-quoted string literal (detected at line 298)
+2025-08-29T23:43:41.6224104Z =============================== warnings summary ===============================
+2025-08-29T23:43:41.6224597Z tests/unit/test_database_operations_real.py:23
+2025-08-29T23:43:41.6226202Z   /home/runner/work/ai-manager/ai-manager/tests/unit/test_database_operations_real.py:23: PytestUnknownMarkWarning: Unknown pytest.mark.database - is this a typo?  You can register custom marks to avoid this warning - for details, see https://docs.pytest.org/en/stable/how-to/mark.html
+2025-08-29T23:43:41.6227893Z     @pytest.mark.database
+2025-08-29T23:43:41.6228109Z 
+2025-08-29T23:43:41.6228237Z src/manager/core/schemas.py:87
+2025-08-29T23:43:41.6229595Z   /home/runner/work/ai-manager/ai-manager/src/manager/core/schemas.py:87: PytestCollectionWarning: cannot collect test class 'TestResults' because it has a __init__ constructor (from: tests/unit/test_schemas.py)
+2025-08-29T23:43:41.6230814Z     class TestResults(BaseModel):
+2025-08-29T23:43:41.6231059Z 
+2025-08-29T23:43:41.6231330Z -- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+2025-08-29T23:43:41.6231917Z =========================== short test summary info ============================
+2025-08-29T23:43:41.6232380Z ERROR tests/unit/test_review_rules.py
+2025-08-29T23:43:41.6232837Z !!!!!!!!!!!!!!!!!!!! Interrupted: 1 error during collection !!!!!!!!!!!!!!!!!!!!
+2025-08-29T23:43:41.6233354Z ========================= 2 warnings, 1 error in 1.22s =========================
+2025-08-29T23:43:41.7033915Z ##[error]Process completed with exit code 2.
+2025-08-29T23:43:41.7142299Z Post job cleanup.
+2025-08-29T23:43:41.8125307Z [command]/usr/bin/git version
+2025-08-29T23:43:41.8166925Z git version 2.51.0
+2025-08-29T23:43:41.8215566Z Temporarily overriding HOME='/home/runner/work/_temp/685ac492-8e75-44ef-9522-9795126b127c' before making global git config changes
+2025-08-29T23:43:41.8217807Z Adding repository directory to the temporary git global config as a safe directory
+2025-08-29T23:43:41.8223150Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:41.8269061Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-08-29T23:43:41.8306666Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-08-29T23:43:41.8552244Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-08-29T23:43:41.8577179Z http.https://github.com/.extraheader
+2025-08-29T23:43:41.8590633Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+2025-08-29T23:43:41.8625162Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-08-29T23:43:41.8981795Z Cleaning up orphan processes

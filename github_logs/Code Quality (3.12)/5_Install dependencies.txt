@@ -1,181 +1,181 @@
-﻿2025-08-29T23:35:48.8513124Z ##[group]Run python -m pip install --upgrade pip
-2025-08-29T23:35:48.8513881Z [36;1mpython -m pip install --upgrade pip[0m
-2025-08-29T23:35:48.8514414Z [36;1mpip install -e .[dev][0m
-2025-08-29T23:35:48.8571088Z shell: /usr/bin/bash -e {0}
-2025-08-29T23:35:48.8571597Z env:
-2025-08-29T23:35:48.8572073Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
-2025-08-29T23:35:48.8572757Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
-2025-08-29T23:35:48.8573418Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
-2025-08-29T23:35:48.8574021Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
-2025-08-29T23:35:48.8574612Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
-2025-08-29T23:35:48.8575224Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
-2025-08-29T23:35:48.8575952Z ##[endgroup]
-2025-08-29T23:35:49.7119484Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages (25.2)
-2025-08-29T23:35:50.2840090Z Obtaining file:///home/runner/work/ai-manager/ai-manager
-2025-08-29T23:35:50.2861473Z   Installing build dependencies: started
-2025-08-29T23:35:51.2170138Z   Installing build dependencies: finished with status 'done'
-2025-08-29T23:35:51.2181904Z   Checking if build backend supports build_editable: started
-2025-08-29T23:35:51.5460504Z   Checking if build backend supports build_editable: finished with status 'done'
-2025-08-29T23:35:51.5462049Z   Getting requirements to build editable: started
-2025-08-29T23:35:51.9319104Z   Getting requirements to build editable: finished with status 'done'
-2025-08-29T23:35:51.9356539Z   Preparing editable metadata (pyproject.toml): started
-2025-08-29T23:35:52.1479869Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
-2025-08-29T23:35:52.2640915Z Collecting fastapi>=0.104.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.2974782Z   Downloading fastapi-0.116.1-py3-none-any.whl.metadata (28 kB)
-2025-08-29T23:35:52.3365759Z Collecting uvicorn>=0.24.0 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:52.3408650Z   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
-2025-08-29T23:35:52.3666632Z Collecting sqlmodel>=0.0.14 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.3718243Z   Downloading sqlmodel-0.0.24-py3-none-any.whl.metadata (10 kB)
-2025-08-29T23:35:52.5005037Z Collecting pydantic>=2.5.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.5037430Z   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
-2025-08-29T23:35:52.5274343Z Collecting pydantic-settings>=2.1.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.5302834Z   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
-2025-08-29T23:35:52.5524212Z Collecting typer>=0.9.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.5553163Z   Downloading typer-0.16.1-py3-none-any.whl.metadata (15 kB)
-2025-08-29T23:35:52.5959784Z Collecting rich>=13.7.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.5990608Z   Downloading rich-14.1.0-py3-none-any.whl.metadata (18 kB)
-2025-08-29T23:35:52.6706362Z Collecting psutil>=5.9.6 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.6740435Z   Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)
-2025-08-29T23:35:52.6906066Z Collecting aiofiles>=23.2.1 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.6938514Z   Downloading aiofiles-24.1.0-py3-none-any.whl.metadata (10 kB)
-2025-08-29T23:35:52.7350204Z Collecting pytest>=7.4.3 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.7412943Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
-2025-08-29T23:35:52.7753034Z Collecting pytest-cov>=4.1.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.7798991Z   Downloading pytest_cov-6.2.1-py3-none-any.whl.metadata (30 kB)
-2025-08-29T23:35:52.8104953Z Collecting pytest-asyncio>=0.21.1 (from ai-manager==0.1.0)
-2025-08-29T23:35:52.8135993Z   Downloading pytest_asyncio-1.1.0-py3-none-any.whl.metadata (4.1 kB)
-2025-08-29T23:35:53.1575268Z Collecting ruff>=0.1.6 (from ai-manager==0.1.0)
-2025-08-29T23:35:53.1608043Z   Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
-2025-08-29T23:35:53.2172174Z Collecting black>=23.11.0 (from ai-manager==0.1.0)
-2025-08-29T23:35:53.2207307Z   Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl.metadata (81 kB)
-2025-08-29T23:35:53.3511822Z Collecting mypy>=1.7.1 (from ai-manager==0.1.0)
-2025-08-29T23:35:53.3545633Z   Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.2 kB)
-2025-08-29T23:35:53.3769360Z Collecting httpx>=0.25.2 (from ai-manager==0.1.0)
-2025-08-29T23:35:53.3813731Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
-2025-08-29T23:35:53.4046018Z Collecting click>=8.0.0 (from black>=23.11.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.4077519Z   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
-2025-08-29T23:35:53.4191993Z Collecting mypy-extensions>=0.4.3 (from black>=23.11.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.4231688Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
-2025-08-29T23:35:53.4443269Z Collecting packaging>=22.0 (from black>=23.11.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.4472839Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
-2025-08-29T23:35:53.4613294Z Collecting pathspec>=0.9.0 (from black>=23.11.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.4644939Z   Downloading pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
-2025-08-29T23:35:53.4890870Z Collecting platformdirs>=2 (from black>=23.11.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.4934149Z   Downloading platformdirs-4.4.0-py3-none-any.whl.metadata (12 kB)
-2025-08-29T23:35:53.5299562Z Collecting starlette<0.48.0,>=0.40.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.5334105Z   Downloading starlette-0.47.3-py3-none-any.whl.metadata (6.2 kB)
-2025-08-29T23:35:53.6320850Z Collecting typing-extensions>=4.8.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.6364022Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
-2025-08-29T23:35:53.6533685Z Collecting annotated-types>=0.6.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
-2025-08-29T23:35:53.6578411Z   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
-2025-08-29T23:35:54.3200794Z Collecting pydantic-core==2.33.2 (from pydantic>=2.5.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.3236463Z   Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
-2025-08-29T23:35:54.3395639Z Collecting typing-inspection>=0.4.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.3425132Z   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
-2025-08-29T23:35:54.3742840Z Collecting anyio<5,>=3.6.2 (from starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.3780844Z   Downloading anyio-4.10.0-py3-none-any.whl.metadata (4.0 kB)
-2025-08-29T23:35:54.4014139Z Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.4049650Z   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
-2025-08-29T23:35:54.4168478Z Collecting sniffio>=1.1 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.4275080Z   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
-2025-08-29T23:35:54.4555235Z Collecting certifi (from httpx>=0.25.2->ai-manager==0.1.0)
-2025-08-29T23:35:54.4675270Z   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
-2025-08-29T23:35:54.4906499Z Collecting httpcore==1.* (from httpx>=0.25.2->ai-manager==0.1.0)
-2025-08-29T23:35:54.4960110Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
-2025-08-29T23:35:54.5130871Z Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.25.2->ai-manager==0.1.0)
-2025-08-29T23:35:54.5164046Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
-2025-08-29T23:35:54.5932692Z Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.1.0->ai-manager==0.1.0)
-2025-08-29T23:35:54.5970909Z   Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
-2025-08-29T23:35:54.6132784Z Collecting iniconfig>=1 (from pytest>=7.4.3->ai-manager==0.1.0)
-2025-08-29T23:35:54.6165582Z   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
-2025-08-29T23:35:54.6355862Z Collecting pluggy<2,>=1.5 (from pytest>=7.4.3->ai-manager==0.1.0)
-2025-08-29T23:35:54.6401420Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
-2025-08-29T23:35:54.6625390Z Collecting pygments>=2.7.2 (from pytest>=7.4.3->ai-manager==0.1.0)
-2025-08-29T23:35:54.6659644Z   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
-2025-08-29T23:35:55.0144096Z Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov>=4.1.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.0176431Z   Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.9 kB)
-2025-08-29T23:35:55.0443786Z Collecting markdown-it-py>=2.2.0 (from rich>=13.7.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.0478825Z   Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
-2025-08-29T23:35:55.0707930Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.7.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.0740936Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
-2025-08-29T23:35:55.4039700Z Collecting SQLAlchemy<2.1.0,>=2.0.14 (from sqlmodel>=0.0.14->ai-manager==0.1.0)
-2025-08-29T23:35:55.4076242Z   Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
-2025-08-29T23:35:55.5834511Z Collecting greenlet>=1 (from SQLAlchemy<2.1.0,>=2.0.14->sqlmodel>=0.0.14->ai-manager==0.1.0)
-2025-08-29T23:35:55.5875008Z   Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (4.1 kB)
-2025-08-29T23:35:55.6136457Z Collecting shellingham>=1.3.0 (from typer>=0.9.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.6170103Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
-2025-08-29T23:35:55.6769714Z Collecting httptools>=0.6.3 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.6805076Z   Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.6 kB)
-2025-08-29T23:35:55.7242459Z Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.7299479Z   Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
-2025-08-29T23:35:55.7839197Z Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.7948321Z   Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
-2025-08-29T23:35:55.8716273Z Collecting watchfiles>=0.13 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.8752600Z   Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
-2025-08-29T23:35:55.9646552Z Collecting websockets>=10.4 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
-2025-08-29T23:35:55.9691355Z   Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
-2025-08-29T23:35:55.9927003Z Downloading aiofiles-24.1.0-py3-none-any.whl (15 kB)
-2025-08-29T23:35:55.9983086Z Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl (1.8 MB)
-2025-08-29T23:35:56.0210068Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 107.4 MB/s  0:00:00
-2025-08-29T23:35:56.0241226Z Downloading click-8.2.1-py3-none-any.whl (102 kB)
-2025-08-29T23:35:56.0314410Z Downloading fastapi-0.116.1-py3-none-any.whl (95 kB)
-2025-08-29T23:35:56.0406335Z Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
-2025-08-29T23:35:56.0483615Z Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
-2025-08-29T23:35:56.0614584Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 176.8 MB/s  0:00:00
-2025-08-29T23:35:56.0652551Z Downloading starlette-0.47.3-py3-none-any.whl (72 kB)
-2025-08-29T23:35:56.0712046Z Downloading anyio-4.10.0-py3-none-any.whl (107 kB)
-2025-08-29T23:35:56.0770161Z Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
-2025-08-29T23:35:56.0827278Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
-2025-08-29T23:35:56.0886958Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
-2025-08-29T23:35:56.0944718Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
-2025-08-29T23:35:56.0999394Z Downloading idna-3.10-py3-none-any.whl (70 kB)
-2025-08-29T23:35:56.1062349Z Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (12.7 MB)
-2025-08-29T23:35:56.1849549Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 171.1 MB/s  0:00:00
-2025-08-29T23:35:56.1895267Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
-2025-08-29T23:35:56.1972142Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
-2025-08-29T23:35:56.2031022Z Downloading pathspec-0.12.1-py3-none-any.whl (31 kB)
-2025-08-29T23:35:56.2089635Z Downloading platformdirs-4.4.0-py3-none-any.whl (18 kB)
-2025-08-29T23:35:56.2148700Z Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (277 kB)
-2025-08-29T23:35:56.2215599Z Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
-2025-08-29T23:35:56.2290303Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
-2025-08-29T23:35:56.2358981Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
-2025-08-29T23:35:56.2412929Z Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
-2025-08-29T23:35:56.2469957Z Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
-2025-08-29T23:35:56.2578170Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 142.4 MB/s  0:00:00
-2025-08-29T23:35:56.2619836Z Downloading pytest_asyncio-1.1.0-py3-none-any.whl (15 kB)
-2025-08-29T23:35:56.2682260Z Downloading pytest_cov-6.2.1-py3-none-any.whl (24 kB)
-2025-08-29T23:35:56.2738147Z Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (251 kB)
-2025-08-29T23:35:56.2806675Z Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
-2025-08-29T23:35:56.2865896Z Downloading rich-14.1.0-py3-none-any.whl (243 kB)
-2025-08-29T23:35:56.2934337Z Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
-2025-08-29T23:35:56.2995353Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
-2025-08-29T23:35:56.3066235Z Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.2 MB)
-2025-08-29T23:35:56.3629274Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 241.3 MB/s  0:00:00
-2025-08-29T23:35:56.3664901Z Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
-2025-08-29T23:35:56.3729153Z Downloading sqlmodel-0.0.24-py3-none-any.whl (28 kB)
-2025-08-29T23:35:56.3788712Z Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
-2025-08-29T23:35:56.3997134Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 174.5 MB/s  0:00:00
-2025-08-29T23:35:56.4034188Z Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (607 kB)
-2025-08-29T23:35:56.4102579Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 607.6/607.6 kB 90.6 MB/s  0:00:00
-2025-08-29T23:35:56.4134827Z Downloading typer-0.16.1-py3-none-any.whl (46 kB)
-2025-08-29T23:35:56.4198983Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
-2025-08-29T23:35:56.4286118Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
-2025-08-29T23:35:56.4387587Z Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
-2025-08-29T23:35:56.4443260Z Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
-2025-08-29T23:35:56.4506200Z Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (510 kB)
-2025-08-29T23:35:56.4586621Z Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (767 kB)
-2025-08-29T23:35:56.4663581Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 767.5/767.5 kB 107.3 MB/s  0:00:00
-2025-08-29T23:35:56.4730504Z Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
-2025-08-29T23:35:56.5003418Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 187.6 MB/s  0:00:00
-2025-08-29T23:35:56.5039839Z Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (452 kB)
-2025-08-29T23:35:56.5138243Z Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (182 kB)
-2025-08-29T23:35:56.5201005Z Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
-2025-08-29T23:35:56.6023101Z Building wheels for collected packages: ai-manager
-2025-08-29T23:35:56.6032661Z   Building editable for ai-manager (pyproject.toml): started
-2025-08-29T23:35:56.8474235Z   Building editable for ai-manager (pyproject.toml): finished with status 'done'
-2025-08-29T23:35:56.8481260Z   Created wheel for ai-manager: filename=ai_manager-0.1.0-0.editable-py3-none-any.whl size=5245 sha256=7484c22198775e060cd1dc21742f121efd9dc0854606bb0384aeebd38accfe9b
-2025-08-29T23:35:56.8483917Z   Stored in directory: /tmp/pip-ephem-wheel-cache-_6uhjgzn/wheels/f3/9a/49/1b264b4141d474e54b9bfd14c7283ca02ac62944f2b4010b6a
-2025-08-29T23:35:56.8509283Z Successfully built ai-manager
-2025-08-29T23:35:56.9390247Z Installing collected packages: websockets, uvloop, typing-extensions, sniffio, shellingham, ruff, pyyaml, python-dotenv, pygments, psutil, pluggy, platformdirs, pathspec, packaging, mypy-extensions, mdurl, iniconfig, idna, httptools, h11, greenlet, coverage, click, certifi, annotated-types, aiofiles, uvicorn, typing-inspection, SQLAlchemy, pytest, pydantic-core, mypy, markdown-it-py, httpcore, black, anyio, watchfiles, starlette, rich, pytest-cov, pytest-asyncio, pydantic, httpx, typer, sqlmodel, pydantic-settings, fastapi, ai-manager
-2025-08-29T23:36:03.2664092Z 
-2025-08-29T23:36:03.2718973Z Successfully installed SQLAlchemy-2.0.43 ai-manager-0.1.0 aiofiles-24.1.0 annotated-types-0.7.0 anyio-4.10.0 black-25.1.0 certifi-2025.8.3 click-8.2.1 coverage-7.10.6 fastapi-0.116.1 greenlet-3.2.4 h11-0.16.0 httpcore-1.0.9 httptools-0.6.4 httpx-0.28.1 idna-3.10 iniconfig-2.1.0 markdown-it-py-4.0.0 mdurl-0.1.2 mypy-1.17.1 mypy-extensions-1.1.0 packaging-25.0 pathspec-0.12.1 platformdirs-4.4.0 pluggy-1.6.0 psutil-7.0.0 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pytest-8.4.1 pytest-asyncio-1.1.0 pytest-cov-6.2.1 python-dotenv-1.1.1 pyyaml-6.0.2 rich-14.1.0 ruff-0.12.11 shellingham-1.5.4 sniffio-1.3.1 sqlmodel-0.0.24 starlette-0.47.3 typer-0.16.1 typing-extensions-4.15.0 typing-inspection-0.4.1 uvicorn-0.35.0 uvloop-0.21.0 watchfiles-1.1.0 websockets-15.0.1
+﻿2025-08-29T23:43:21.0286106Z ##[group]Run python -m pip install --upgrade pip
+2025-08-29T23:43:21.0286640Z [36;1mpython -m pip install --upgrade pip[0m
+2025-08-29T23:43:21.0286973Z [36;1mpip install -e .[dev][0m
+2025-08-29T23:43:21.0398198Z shell: /usr/bin/bash -e {0}
+2025-08-29T23:43:21.0398779Z env:
+2025-08-29T23:43:21.0399072Z   pythonLocation: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:21.0399530Z   PKG_CONFIG_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib/pkgconfig
+2025-08-29T23:43:21.0399972Z   Python_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:21.0400386Z   Python2_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:21.0400794Z   Python3_ROOT_DIR: /opt/hostedtoolcache/Python/3.12.11/x64
+2025-08-29T23:43:21.0401182Z   LD_LIBRARY_PATH: /opt/hostedtoolcache/Python/3.12.11/x64/lib
+2025-08-29T23:43:21.0401514Z ##[endgroup]
+2025-08-29T23:43:24.1674299Z Requirement already satisfied: pip in /opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages (25.2)
+2025-08-29T23:43:25.1961725Z Obtaining file:///home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:25.1988862Z   Installing build dependencies: started
+2025-08-29T23:43:26.5890889Z   Installing build dependencies: finished with status 'done'
+2025-08-29T23:43:26.5895828Z   Checking if build backend supports build_editable: started
+2025-08-29T23:43:26.9227317Z   Checking if build backend supports build_editable: finished with status 'done'
+2025-08-29T23:43:26.9242462Z   Getting requirements to build editable: started
+2025-08-29T23:43:27.2765484Z   Getting requirements to build editable: finished with status 'done'
+2025-08-29T23:43:27.2775502Z   Preparing editable metadata (pyproject.toml): started
+2025-08-29T23:43:27.4771841Z   Preparing editable metadata (pyproject.toml): finished with status 'done'
+2025-08-29T23:43:27.5822306Z Collecting fastapi>=0.104.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.6270881Z   Downloading fastapi-0.116.1-py3-none-any.whl.metadata (28 kB)
+2025-08-29T23:43:27.6706686Z Collecting uvicorn>=0.24.0 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:27.6794133Z   Downloading uvicorn-0.35.0-py3-none-any.whl.metadata (6.5 kB)
+2025-08-29T23:43:27.6994899Z Collecting sqlmodel>=0.0.14 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.7087068Z   Downloading sqlmodel-0.0.24-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:27.8502772Z Collecting pydantic>=2.5.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.8582241Z   Downloading pydantic-2.11.7-py3-none-any.whl.metadata (67 kB)
+2025-08-29T23:43:27.8878059Z Collecting pydantic-settings>=2.1.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.8957667Z   Downloading pydantic_settings-2.10.1-py3-none-any.whl.metadata (3.4 kB)
+2025-08-29T23:43:27.9199370Z Collecting typer>=0.9.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.9280655Z   Downloading typer-0.16.1-py3-none-any.whl.metadata (15 kB)
+2025-08-29T23:43:27.9719025Z Collecting rich>=13.7.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:27.9793010Z   Downloading rich-14.1.0-py3-none-any.whl.metadata (18 kB)
+2025-08-29T23:43:28.0574954Z Collecting psutil>=5.9.6 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.0654297Z   Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (22 kB)
+2025-08-29T23:43:28.0880320Z Collecting aiofiles>=23.2.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.0957894Z   Downloading aiofiles-24.1.0-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:28.1369267Z Collecting pytest>=7.4.3 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.1447425Z   Downloading pytest-8.4.1-py3-none-any.whl.metadata (7.7 kB)
+2025-08-29T23:43:28.1766845Z Collecting pytest-cov>=4.1.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.1847114Z   Downloading pytest_cov-6.2.1-py3-none-any.whl.metadata (30 kB)
+2025-08-29T23:43:28.2146356Z Collecting pytest-asyncio>=0.21.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.2225056Z   Downloading pytest_asyncio-1.1.0-py3-none-any.whl.metadata (4.1 kB)
+2025-08-29T23:43:28.5987803Z Collecting ruff>=0.1.6 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.6072729Z   Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (25 kB)
+2025-08-29T23:43:28.6595508Z Collecting black>=23.11.0 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.6672810Z   Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl.metadata (81 kB)
+2025-08-29T23:43:28.7996166Z Collecting mypy>=1.7.1 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.8074516Z   Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.2 kB)
+2025-08-29T23:43:28.8335393Z Collecting httpx>=0.25.2 (from ai-manager==0.1.0)
+2025-08-29T23:43:28.8411005Z   Downloading httpx-0.28.1-py3-none-any.whl.metadata (7.1 kB)
+2025-08-29T23:43:28.8668020Z Collecting click>=8.0.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.8743020Z   Downloading click-8.2.1-py3-none-any.whl.metadata (2.5 kB)
+2025-08-29T23:43:28.8892990Z Collecting mypy-extensions>=0.4.3 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.8972165Z   Downloading mypy_extensions-1.1.0-py3-none-any.whl.metadata (1.1 kB)
+2025-08-29T23:43:28.9180858Z Collecting packaging>=22.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9252390Z   Downloading packaging-25.0-py3-none-any.whl.metadata (3.3 kB)
+2025-08-29T23:43:28.9426880Z Collecting pathspec>=0.9.0 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9513856Z   Downloading pathspec-0.12.1-py3-none-any.whl.metadata (21 kB)
+2025-08-29T23:43:28.9776006Z Collecting platformdirs>=2 (from black>=23.11.0->ai-manager==0.1.0)
+2025-08-29T23:43:28.9848803Z   Downloading platformdirs-4.4.0-py3-none-any.whl.metadata (12 kB)
+2025-08-29T23:43:29.0249543Z Collecting starlette<0.48.0,>=0.40.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.0323692Z   Downloading starlette-0.47.3-py3-none-any.whl.metadata (6.2 kB)
+2025-08-29T23:43:29.0845103Z Collecting typing-extensions>=4.8.0 (from fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.0921880Z   Downloading typing_extensions-4.15.0-py3-none-any.whl.metadata (3.3 kB)
+2025-08-29T23:43:29.1081255Z Collecting annotated-types>=0.6.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.1153590Z   Downloading annotated_types-0.7.0-py3-none-any.whl.metadata (15 kB)
+2025-08-29T23:43:29.8053606Z Collecting pydantic-core==2.33.2 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8128020Z   Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-08-29T23:43:29.8314371Z Collecting typing-inspection>=0.4.0 (from pydantic>=2.5.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8393791Z   Downloading typing_inspection-0.4.1-py3-none-any.whl.metadata (2.6 kB)
+2025-08-29T23:43:29.8702905Z Collecting anyio<5,>=3.6.2 (from starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.8774703Z   Downloading anyio-4.10.0-py3-none-any.whl.metadata (4.0 kB)
+2025-08-29T23:43:29.9012049Z Collecting idna>=2.8 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.9085414Z   Downloading idna-3.10-py3-none-any.whl.metadata (10 kB)
+2025-08-29T23:43:29.9244311Z Collecting sniffio>=1.1 (from anyio<5,>=3.6.2->starlette<0.48.0,>=0.40.0->fastapi>=0.104.0->ai-manager==0.1.0)
+2025-08-29T23:43:29.9320252Z   Downloading sniffio-1.3.1-py3-none-any.whl.metadata (3.9 kB)
+2025-08-29T23:43:29.9620227Z Collecting certifi (from httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:29.9693232Z   Downloading certifi-2025.8.3-py3-none-any.whl.metadata (2.4 kB)
+2025-08-29T23:43:29.9967656Z Collecting httpcore==1.* (from httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:30.0034185Z   Downloading httpcore-1.0.9-py3-none-any.whl.metadata (21 kB)
+2025-08-29T23:43:30.0224274Z Collecting h11>=0.16 (from httpcore==1.*->httpx>=0.25.2->ai-manager==0.1.0)
+2025-08-29T23:43:30.0297963Z   Downloading h11-0.16.0-py3-none-any.whl.metadata (8.3 kB)
+2025-08-29T23:43:30.0894066Z Collecting python-dotenv>=0.21.0 (from pydantic-settings>=2.1.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.0966075Z   Downloading python_dotenv-1.1.1-py3-none-any.whl.metadata (24 kB)
+2025-08-29T23:43:30.1146963Z Collecting iniconfig>=1 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.1221126Z   Downloading iniconfig-2.1.0-py3-none-any.whl.metadata (2.7 kB)
+2025-08-29T23:43:30.1439181Z Collecting pluggy<2,>=1.5 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.1510374Z   Downloading pluggy-1.6.0-py3-none-any.whl.metadata (4.8 kB)
+2025-08-29T23:43:30.1765352Z Collecting pygments>=2.7.2 (from pytest>=7.4.3->ai-manager==0.1.0)
+2025-08-29T23:43:30.1837795Z   Downloading pygments-2.19.2-py3-none-any.whl.metadata (2.5 kB)
+2025-08-29T23:43:30.5311995Z Collecting coverage>=7.5 (from coverage[toml]>=7.5->pytest-cov>=4.1.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.5388823Z   Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl.metadata (8.9 kB)
+2025-08-29T23:43:30.5664445Z Collecting markdown-it-py>=2.2.0 (from rich>=13.7.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.5741092Z   Downloading markdown_it_py-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+2025-08-29T23:43:30.5983181Z Collecting mdurl~=0.1 (from markdown-it-py>=2.2.0->rich>=13.7.0->ai-manager==0.1.0)
+2025-08-29T23:43:30.6056525Z   Downloading mdurl-0.1.2-py3-none-any.whl.metadata (1.6 kB)
+2025-08-29T23:43:30.9304915Z Collecting SQLAlchemy<2.1.0,>=2.0.14 (from sqlmodel>=0.0.14->ai-manager==0.1.0)
+2025-08-29T23:43:30.9383755Z   Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (9.6 kB)
+2025-08-29T23:43:31.1046434Z Collecting greenlet>=1 (from SQLAlchemy<2.1.0,>=2.0.14->sqlmodel>=0.0.14->ai-manager==0.1.0)
+2025-08-29T23:43:31.1123852Z   Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (4.1 kB)
+2025-08-29T23:43:31.1393355Z Collecting shellingham>=1.3.0 (from typer>=0.9.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.1472054Z   Downloading shellingham-1.5.4-py2.py3-none-any.whl.metadata (3.5 kB)
+2025-08-29T23:43:31.2083992Z Collecting httptools>=0.6.3 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.2160783Z   Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (3.6 kB)
+2025-08-29T23:43:31.2592581Z Collecting pyyaml>=5.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.2666088Z   Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (2.1 kB)
+2025-08-29T23:43:31.3106611Z Collecting uvloop>=0.15.1 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.3192447Z   Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2025-08-29T23:43:31.3972734Z Collecting watchfiles>=0.13 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.4049820Z   Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (4.9 kB)
+2025-08-29T23:43:31.5001570Z Collecting websockets>=10.4 (from uvicorn[standard]>=0.24.0->ai-manager==0.1.0)
+2025-08-29T23:43:31.5080545Z   Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (6.8 kB)
+2025-08-29T23:43:31.5352522Z Downloading aiofiles-24.1.0-py3-none-any.whl (15 kB)
+2025-08-29T23:43:31.5449394Z Downloading black-25.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.manylinux_2_28_x86_64.whl (1.8 MB)
+2025-08-29T23:43:31.5710785Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.8/1.8 MB 88.0 MB/s  0:00:00
+2025-08-29T23:43:31.5786399Z Downloading click-8.2.1-py3-none-any.whl (102 kB)
+2025-08-29T23:43:31.5891149Z Downloading fastapi-0.116.1-py3-none-any.whl (95 kB)
+2025-08-29T23:43:31.5992332Z Downloading pydantic-2.11.7-py3-none-any.whl (444 kB)
+2025-08-29T23:43:31.6112055Z Downloading pydantic_core-2.33.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (2.0 MB)
+2025-08-29T23:43:31.6229038Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 189.7 MB/s  0:00:00
+2025-08-29T23:43:31.6304869Z Downloading starlette-0.47.3-py3-none-any.whl (72 kB)
+2025-08-29T23:43:31.6409179Z Downloading anyio-4.10.0-py3-none-any.whl (107 kB)
+2025-08-29T23:43:31.6509484Z Downloading annotated_types-0.7.0-py3-none-any.whl (13 kB)
+2025-08-29T23:43:31.6605128Z Downloading httpx-0.28.1-py3-none-any.whl (73 kB)
+2025-08-29T23:43:31.6701947Z Downloading httpcore-1.0.9-py3-none-any.whl (78 kB)
+2025-08-29T23:43:31.6796802Z Downloading h11-0.16.0-py3-none-any.whl (37 kB)
+2025-08-29T23:43:31.6978053Z Downloading idna-3.10-py3-none-any.whl (70 kB)
+2025-08-29T23:43:31.7078064Z Downloading mypy-1.17.1-cp312-cp312-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (12.7 MB)
+2025-08-29T23:43:31.7689170Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.7/12.7 MB 216.8 MB/s  0:00:00
+2025-08-29T23:43:31.7763241Z Downloading mypy_extensions-1.1.0-py3-none-any.whl (5.0 kB)
+2025-08-29T23:43:31.7856134Z Downloading packaging-25.0-py3-none-any.whl (66 kB)
+2025-08-29T23:43:31.7953216Z Downloading pathspec-0.12.1-py3-none-any.whl (31 kB)
+2025-08-29T23:43:31.8047812Z Downloading platformdirs-4.4.0-py3-none-any.whl (18 kB)
+2025-08-29T23:43:31.8142402Z Downloading psutil-7.0.0-cp36-abi3-manylinux_2_12_x86_64.manylinux2010_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (277 kB)
+2025-08-29T23:43:31.8244209Z Downloading pydantic_settings-2.10.1-py3-none-any.whl (45 kB)
+2025-08-29T23:43:31.8341237Z Downloading pytest-8.4.1-py3-none-any.whl (365 kB)
+2025-08-29T23:43:31.8447066Z Downloading pluggy-1.6.0-py3-none-any.whl (20 kB)
+2025-08-29T23:43:31.8544275Z Downloading iniconfig-2.1.0-py3-none-any.whl (6.0 kB)
+2025-08-29T23:43:31.8655742Z Downloading pygments-2.19.2-py3-none-any.whl (1.2 MB)
+2025-08-29T23:43:31.8745252Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 154.8 MB/s  0:00:00
+2025-08-29T23:43:31.8822190Z Downloading pytest_asyncio-1.1.0-py3-none-any.whl (15 kB)
+2025-08-29T23:43:31.8928685Z Downloading pytest_cov-6.2.1-py3-none-any.whl (24 kB)
+2025-08-29T23:43:31.9032509Z Downloading coverage-7.10.6-cp312-cp312-manylinux1_x86_64.manylinux_2_28_x86_64.manylinux_2_5_x86_64.whl (251 kB)
+2025-08-29T23:43:31.9135677Z Downloading python_dotenv-1.1.1-py3-none-any.whl (20 kB)
+2025-08-29T23:43:31.9234269Z Downloading rich-14.1.0-py3-none-any.whl (243 kB)
+2025-08-29T23:43:31.9342343Z Downloading markdown_it_py-4.0.0-py3-none-any.whl (87 kB)
+2025-08-29T23:43:31.9442157Z Downloading mdurl-0.1.2-py3-none-any.whl (10.0 kB)
+2025-08-29T23:43:31.9536114Z Downloading ruff-0.12.11-py3-none-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (13.2 MB)
+2025-08-29T23:43:32.0142344Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 13.2/13.2 MB 224.9 MB/s  0:00:00
+2025-08-29T23:43:32.0228653Z Downloading sniffio-1.3.1-py3-none-any.whl (10 kB)
+2025-08-29T23:43:32.0331725Z Downloading sqlmodel-0.0.24-py3-none-any.whl (28 kB)
+2025-08-29T23:43:32.0443515Z Downloading sqlalchemy-2.0.43-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (3.3 MB)
+2025-08-29T23:43:32.0631275Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 3.3/3.3 MB 194.8 MB/s  0:00:00
+2025-08-29T23:43:32.0709244Z Downloading greenlet-3.2.4-cp312-cp312-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (607 kB)
+2025-08-29T23:43:32.0785330Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 607.6/607.6 kB 77.1 MB/s  0:00:00
+2025-08-29T23:43:32.0860550Z Downloading typer-0.16.1-py3-none-any.whl (46 kB)
+2025-08-29T23:43:32.0967425Z Downloading shellingham-1.5.4-py2.py3-none-any.whl (9.8 kB)
+2025-08-29T23:43:32.1060490Z Downloading typing_extensions-4.15.0-py3-none-any.whl (44 kB)
+2025-08-29T23:43:32.1155539Z Downloading typing_inspection-0.4.1-py3-none-any.whl (14 kB)
+2025-08-29T23:43:32.1252370Z Downloading uvicorn-0.35.0-py3-none-any.whl (66 kB)
+2025-08-29T23:43:32.1355421Z Downloading httptools-0.6.4-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (510 kB)
+2025-08-29T23:43:32.1473843Z Downloading PyYAML-6.0.2-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (767 kB)
+2025-08-29T23:43:32.1541312Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 767.5/767.5 kB 119.9 MB/s  0:00:00
+2025-08-29T23:43:32.1616852Z Downloading uvloop-0.21.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (4.7 MB)
+2025-08-29T23:43:32.1873822Z    ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.7/4.7 MB 208.9 MB/s  0:00:00
+2025-08-29T23:43:32.1938272Z Downloading watchfiles-1.1.0-cp312-cp312-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (452 kB)
+2025-08-29T23:43:32.2056218Z Downloading websockets-15.0.1-cp312-cp312-manylinux_2_5_x86_64.manylinux1_x86_64.manylinux_2_17_x86_64.manylinux2014_x86_64.whl (182 kB)
+2025-08-29T23:43:32.2158236Z Downloading certifi-2025.8.3-py3-none-any.whl (161 kB)
+2025-08-29T23:43:32.3047837Z Building wheels for collected packages: ai-manager
+2025-08-29T23:43:32.3056782Z   Building editable for ai-manager (pyproject.toml): started
+2025-08-29T23:43:32.5344332Z   Building editable for ai-manager (pyproject.toml): finished with status 'done'
+2025-08-29T23:43:32.5351154Z   Created wheel for ai-manager: filename=ai_manager-0.1.0-0.editable-py3-none-any.whl size=5245 sha256=45583f310f900323f6d9ec47552b82feaab43ff3fa0ac96a40b0a4d677894951
+2025-08-29T23:43:32.5354468Z   Stored in directory: /tmp/pip-ephem-wheel-cache-w9vkb1xl/wheels/f3/9a/49/1b264b4141d474e54b9bfd14c7283ca02ac62944f2b4010b6a
+2025-08-29T23:43:32.5379197Z Successfully built ai-manager
+2025-08-29T23:43:32.6245943Z Installing collected packages: websockets, uvloop, typing-extensions, sniffio, shellingham, ruff, pyyaml, python-dotenv, pygments, psutil, pluggy, platformdirs, pathspec, packaging, mypy-extensions, mdurl, iniconfig, idna, httptools, h11, greenlet, coverage, click, certifi, annotated-types, aiofiles, uvicorn, typing-inspection, SQLAlchemy, pytest, pydantic-core, mypy, markdown-it-py, httpcore, black, anyio, watchfiles, starlette, rich, pytest-cov, pytest-asyncio, pydantic, httpx, typer, sqlmodel, pydantic-settings, fastapi, ai-manager
+2025-08-29T23:43:38.3994455Z 
+2025-08-29T23:43:38.4045273Z Successfully installed SQLAlchemy-2.0.43 ai-manager-0.1.0 aiofiles-24.1.0 annotated-types-0.7.0 anyio-4.10.0 black-25.1.0 certifi-2025.8.3 click-8.2.1 coverage-7.10.6 fastapi-0.116.1 greenlet-3.2.4 h11-0.16.0 httpcore-1.0.9 httptools-0.6.4 httpx-0.28.1 idna-3.10 iniconfig-2.1.0 markdown-it-py-4.0.0 mdurl-0.1.2 mypy-1.17.1 mypy-extensions-1.1.0 packaging-25.0 pathspec-0.12.1 platformdirs-4.4.0 pluggy-1.6.0 psutil-7.0.0 pydantic-2.11.7 pydantic-core-2.33.2 pydantic-settings-2.10.1 pygments-2.19.2 pytest-8.4.1 pytest-asyncio-1.1.0 pytest-cov-6.2.1 python-dotenv-1.1.1 pyyaml-6.0.2 rich-14.1.0 ruff-0.12.11 shellingham-1.5.4 sniffio-1.3.1 sqlmodel-0.0.24 starlette-0.47.3 typer-0.16.1 typing-extensions-4.15.0 typing-inspection-0.4.1 uvicorn-0.35.0 uvloop-0.21.0 watchfiles-1.1.0 websockets-15.0.1

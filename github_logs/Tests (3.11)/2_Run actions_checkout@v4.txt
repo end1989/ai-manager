@@ -1,69 +1,69 @@
-﻿2025-08-29T23:35:47.8016573Z ##[group]Run actions/checkout@v4
-2025-08-29T23:35:47.8017326Z with:
-2025-08-29T23:35:47.8017644Z   repository: end1989/ai-manager
-2025-08-29T23:35:47.8018393Z   token: ***
-2025-08-29T23:35:47.8018707Z   ssh-strict: true
-2025-08-29T23:35:47.8019004Z   ssh-user: git
-2025-08-29T23:35:47.8019312Z   persist-credentials: true
-2025-08-29T23:35:47.8019645Z   clean: true
-2025-08-29T23:35:47.8019958Z   sparse-checkout-cone-mode: true
-2025-08-29T23:35:47.8020302Z   fetch-depth: 1
-2025-08-29T23:35:47.8020623Z   fetch-tags: false
-2025-08-29T23:35:47.8020945Z   show-progress: true
-2025-08-29T23:35:47.8021248Z   lfs: false
-2025-08-29T23:35:47.8021525Z   submodules: false
-2025-08-29T23:35:47.8021894Z   set-safe-directory: true
-2025-08-29T23:35:47.8022523Z ##[endgroup]
-2025-08-29T23:35:47.9243420Z Syncing repository: end1989/ai-manager
-2025-08-29T23:35:47.9246388Z ##[group]Getting Git version info
-2025-08-29T23:35:47.9247310Z Working directory is '/home/runner/work/ai-manager/ai-manager'
-2025-08-29T23:35:47.9249023Z [command]/usr/bin/git version
-2025-08-29T23:35:47.9334487Z git version 2.51.0
-2025-08-29T23:35:47.9372102Z ##[endgroup]
-2025-08-29T23:35:47.9386253Z Temporarily overriding HOME='/home/runner/work/_temp/9c4f11b4-14cc-455c-a488-ed9e655048fd' before making global git config changes
-2025-08-29T23:35:47.9389875Z Adding repository directory to the temporary git global config as a safe directory
-2025-08-29T23:35:47.9396226Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ai-manager/ai-manager
-2025-08-29T23:35:47.9443634Z Deleting the contents of '/home/runner/work/ai-manager/ai-manager'
-2025-08-29T23:35:47.9448966Z ##[group]Initializing the repository
-2025-08-29T23:35:47.9456127Z [command]/usr/bin/git init /home/runner/work/ai-manager/ai-manager
-2025-08-29T23:35:47.9592365Z hint: Using 'master' as the name for the initial branch. This default branch name
-2025-08-29T23:35:47.9594645Z hint: is subject to change. To configure the initial branch name to use in all
-2025-08-29T23:35:47.9596254Z hint: of your new repositories, which will suppress this warning, call:
-2025-08-29T23:35:47.9597135Z hint:
-2025-08-29T23:35:47.9597815Z hint: 	git config --global init.defaultBranch <name>
-2025-08-29T23:35:47.9598839Z hint:
-2025-08-29T23:35:47.9599565Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
-2025-08-29T23:35:47.9600589Z hint: 'development'. The just-created branch can be renamed via this command:
-2025-08-29T23:35:47.9601443Z hint:
-2025-08-29T23:35:47.9601953Z hint: 	git branch -m <name>
-2025-08-29T23:35:47.9602517Z hint:
-2025-08-29T23:35:47.9603237Z hint: Disable this message with "git config set advice.defaultBranchName false"
-2025-08-29T23:35:47.9604308Z Initialized empty Git repository in /home/runner/work/ai-manager/ai-manager/.git/
-2025-08-29T23:35:47.9611309Z [command]/usr/bin/git remote add origin https://github.com/end1989/ai-manager
-2025-08-29T23:35:47.9659265Z ##[endgroup]
-2025-08-29T23:35:47.9660318Z ##[group]Disabling automatic garbage collection
-2025-08-29T23:35:47.9663122Z [command]/usr/bin/git config --local gc.auto 0
-2025-08-29T23:35:47.9706763Z ##[endgroup]
-2025-08-29T23:35:47.9707686Z ##[group]Setting up auth
-2025-08-29T23:35:47.9708741Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
-2025-08-29T23:35:47.9744624Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
-2025-08-29T23:35:48.0113608Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
-2025-08-29T23:35:48.0148613Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
-2025-08-29T23:35:48.0396806Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
-2025-08-29T23:35:48.0440679Z ##[endgroup]
-2025-08-29T23:35:48.0442889Z ##[group]Fetching the repository
-2025-08-29T23:35:48.0452516Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +d4208231364d513cf81bb3bbc9b8d6e949aea139:refs/remotes/origin/main
-2025-08-29T23:35:48.7437675Z From https://github.com/end1989/ai-manager
-2025-08-29T23:35:48.7438655Z  * [new ref]         d4208231364d513cf81bb3bbc9b8d6e949aea139 -> origin/main
-2025-08-29T23:35:48.7440225Z ##[endgroup]
-2025-08-29T23:35:48.7440770Z ##[group]Determining the checkout info
-2025-08-29T23:35:48.7441370Z ##[endgroup]
-2025-08-29T23:35:48.7441731Z [command]/usr/bin/git sparse-checkout disable
-2025-08-29T23:35:48.7442892Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
-2025-08-29T23:35:48.7487204Z ##[group]Checking out the ref
-2025-08-29T23:35:48.7489109Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
-2025-08-29T23:35:48.7603394Z Switched to a new branch 'main'
-2025-08-29T23:35:48.7607097Z branch 'main' set up to track 'origin/main'.
-2025-08-29T23:35:48.7614018Z ##[endgroup]
-2025-08-29T23:35:48.7653885Z [command]/usr/bin/git log -1 --format=%H
-2025-08-29T23:35:48.7678358Z d4208231364d513cf81bb3bbc9b8d6e949aea139
+﻿2025-08-29T23:43:21.0081006Z ##[group]Run actions/checkout@v4
+2025-08-29T23:43:21.0081931Z with:
+2025-08-29T23:43:21.0082365Z   repository: end1989/ai-manager
+2025-08-29T23:43:21.0083043Z   token: ***
+2025-08-29T23:43:21.0083444Z   ssh-strict: true
+2025-08-29T23:43:21.0083851Z   ssh-user: git
+2025-08-29T23:43:21.0084275Z   persist-credentials: true
+2025-08-29T23:43:21.0084744Z   clean: true
+2025-08-29T23:43:21.0085181Z   sparse-checkout-cone-mode: true
+2025-08-29T23:43:21.0085697Z   fetch-depth: 1
+2025-08-29T23:43:21.0086113Z   fetch-tags: false
+2025-08-29T23:43:21.0086591Z   show-progress: true
+2025-08-29T23:43:21.0087022Z   lfs: false
+2025-08-29T23:43:21.0087407Z   submodules: false
+2025-08-29T23:43:21.0087853Z   set-safe-directory: true
+2025-08-29T23:43:21.0088710Z ##[endgroup]
+2025-08-29T23:43:21.1232675Z Syncing repository: end1989/ai-manager
+2025-08-29T23:43:21.1234906Z ##[group]Getting Git version info
+2025-08-29T23:43:21.1235685Z Working directory is '/home/runner/work/ai-manager/ai-manager'
+2025-08-29T23:43:21.1239085Z [command]/usr/bin/git version
+2025-08-29T23:43:21.1327202Z git version 2.51.0
+2025-08-29T23:43:21.1359014Z ##[endgroup]
+2025-08-29T23:43:21.1375709Z Temporarily overriding HOME='/home/runner/work/_temp/1a5ae100-246b-4e77-8037-3219194afdcc' before making global git config changes
+2025-08-29T23:43:21.1380266Z Adding repository directory to the temporary git global config as a safe directory
+2025-08-29T23:43:21.1384286Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:21.1430244Z Deleting the contents of '/home/runner/work/ai-manager/ai-manager'
+2025-08-29T23:43:21.1435129Z ##[group]Initializing the repository
+2025-08-29T23:43:21.1440647Z [command]/usr/bin/git init /home/runner/work/ai-manager/ai-manager
+2025-08-29T23:43:21.1654293Z hint: Using 'master' as the name for the initial branch. This default branch name
+2025-08-29T23:43:21.1657938Z hint: is subject to change. To configure the initial branch name to use in all
+2025-08-29T23:43:21.1660422Z hint: of your new repositories, which will suppress this warning, call:
+2025-08-29T23:43:21.1661807Z hint:
+2025-08-29T23:43:21.1662768Z hint: 	git config --global init.defaultBranch <name>
+2025-08-29T23:43:21.1663924Z hint:
+2025-08-29T23:43:21.1664956Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+2025-08-29T23:43:21.1666605Z hint: 'development'. The just-created branch can be renamed via this command:
+2025-08-29T23:43:21.1667936Z hint:
+2025-08-29T23:43:21.1668892Z hint: 	git branch -m <name>
+2025-08-29T23:43:21.1669760Z hint:
+2025-08-29T23:43:21.1670885Z hint: Disable this message with "git config set advice.defaultBranchName false"
+2025-08-29T23:43:21.1672319Z Initialized empty Git repository in /home/runner/work/ai-manager/ai-manager/.git/
+2025-08-29T23:43:21.1673995Z [command]/usr/bin/git remote add origin https://github.com/end1989/ai-manager
+2025-08-29T23:43:21.1696584Z ##[endgroup]
+2025-08-29T23:43:21.1699303Z ##[group]Disabling automatic garbage collection
+2025-08-29T23:43:21.1701331Z [command]/usr/bin/git config --local gc.auto 0
+2025-08-29T23:43:21.1736434Z ##[endgroup]
+2025-08-29T23:43:21.1739580Z ##[group]Setting up auth
+2025-08-29T23:43:21.1743484Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+2025-08-29T23:43:21.1777524Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+2025-08-29T23:43:21.2132729Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+2025-08-29T23:43:21.2162996Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+2025-08-29T23:43:21.2400180Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+2025-08-29T23:43:21.2438842Z ##[endgroup]
+2025-08-29T23:43:21.2442356Z ##[group]Fetching the repository
+2025-08-29T23:43:21.2450016Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin +a93b2371421b66cab483261d7bd6a1505c5842cd:refs/remotes/origin/main
+2025-08-29T23:43:21.8694851Z From https://github.com/end1989/ai-manager
+2025-08-29T23:43:21.8696741Z  * [new ref]         a93b2371421b66cab483261d7bd6a1505c5842cd -> origin/main
+2025-08-29T23:43:21.8736210Z ##[endgroup]
+2025-08-29T23:43:21.8738397Z ##[group]Determining the checkout info
+2025-08-29T23:43:21.8740972Z ##[endgroup]
+2025-08-29T23:43:21.8742449Z [command]/usr/bin/git sparse-checkout disable
+2025-08-29T23:43:21.8823513Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+2025-08-29T23:43:21.8869748Z ##[group]Checking out the ref
+2025-08-29T23:43:21.8873377Z [command]/usr/bin/git checkout --progress --force -B main refs/remotes/origin/main
+2025-08-29T23:43:21.9630308Z Switched to a new branch 'main'
+2025-08-29T23:43:21.9633940Z branch 'main' set up to track 'origin/main'.
+2025-08-29T23:43:21.9657318Z ##[endgroup]
+2025-08-29T23:43:21.9726865Z [command]/usr/bin/git log -1 --format=%H
+2025-08-29T23:43:21.9770471Z a93b2371421b66cab483261d7bd6a1505c5842cd
