@@ -19,7 +19,7 @@ We take the security of the AI Manager system seriously. If you believe you have
 
 Instead, please report them via one of the following methods:
 
-1. **Email**: Send details to security@yourdomain.com
+1. **Email**: Send details to eldondahlin@gmail.com
 2. **GitHub Security Advisory**: Use the "Security" tab in the repository to create a private security advisory
 3. **Encrypted Communication**: Use our PGP key (available on request)
 
@@ -91,7 +91,7 @@ Our security approach includes:
 ### Security Contact
 
 For security-related questions or concerns, contact:
-- **Email**: security@yourdomain.com
+- **Email**: eldondahlin@gmail.com
 - **Response Time**: 48 hours maximum
 
 ### Hall of Fame
@@ -149,4 +149,4 @@ This policy is designed to be compatible with common vulnerability disclosure pr
 
 **Last Updated**: 2025-08-29  
 **Version**: 1.0.0  
-**Contact**: security@yourdomain.com
+**Contact**: eldondahlin@gmail.com
