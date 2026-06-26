@@ -101,3 +101,34 @@ logs/
 .idea/
 *.swp
 *.swo
+
+# === workstation rescue: keep repo lean (code-first) ===
+node_modules/
+.venv/
+venv/
+env/
+__pycache__/
+*.pyc
+*.pyo
+target/
+dist/
+build/
+out/
+bin/
+obj/
+.gradle/
+.cache/
+.next/
+.nuxt/
+*.log
+# secrets - never publish
+.env
+*.env
+*.pem
+*.key
+id_rsa*
+*.pfx
+credentials*.json
+secrets*.json
+.secrets
+*.tfstate
